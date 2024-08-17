@@ -30,12 +30,37 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
     {
         public void Run()
         {
+            // for 반복문에서 break와 continue 사용
+            Console.WriteLine("Using break and continue in for loop:");
             for (int i = 0; i < 10; i++)
             {
-                if (i == 5) break; // i가 5에 도달하면 반복문 종료
-                if (i % 2 == 0) continue; // i가 짝수면 현재 반복을 건너뛰고 다음 반복 진행
-                Console.WriteLine(i);
+                if (i == 5) break; // i가 5일 때 반복문 종료
+                if (i % 2 == 0) continue; // i가 짝수일 경우 출력 건너뛰기
+                Console.WriteLine(i); // 홀수만 출력
             }
+
+            // while 반복문에서 break와 continue 사용
+            Console.WriteLine("\nUsing break and continue in while loop:");
+            int count = 0;
+            while (count < 10)
+            {
+                if (count == 7) break; // count가 7일 때 반복문 종료
+                count++;
+                if (count % 2 == 0) continue; // count가 짝수일 경우 건너뛰기
+                Console.WriteLine(count); // 홀수만 출력
+            }
+
+            // do-while 반복문에서 break와 continue 사용
+            Console.WriteLine("\nUsing break and continue in do-while loop:");
+            int number = 0;
+            do
+            {
+                if (number == 6) break; // number가 6일 때 반복문 종료
+                number++;
+                if (number % 2 == 0) continue; // number가 짝수일 경우 건너뛰기
+                Console.WriteLine(number); // 홀수만 출력
+            }
+            while (number < 10);
         }
     }
 }

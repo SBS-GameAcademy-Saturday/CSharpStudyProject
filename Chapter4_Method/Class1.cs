@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
+namespace CSharp_ProgramingStudy.Chapter4_Method
 {
     /// <summary>
     /// 함수
@@ -39,7 +39,7 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
     /// 효율적이고 체계적인 프로그램 개발을 위해 필수적으로 사용됩니다.
     /// 
     /// </summary>
-    public class Class8
+    public class Class1
     {
         public void PrintMessage(string message)
         {

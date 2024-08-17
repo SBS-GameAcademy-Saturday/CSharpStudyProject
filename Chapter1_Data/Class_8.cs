@@ -29,6 +29,7 @@ namespace Chapter1_Data
     /// 데이터 손실을 피하기 위해 적절한 캐스팅 방법을 선택하는 것은 개발자의 책임입니다.
     /// </summary>
     public class Class_8
+    
     {
         public void Run()
         {

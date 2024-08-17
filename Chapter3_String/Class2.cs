@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace Chapter3_String
 {
     /// <summary>
     /// 파싱
@@ -31,7 +31,7 @@ namespace Chapter1_Data
     /// 파싱은 프로그래밍에서 흔히 발생하는 작업 중 하나이며, 문자열 데이터를 다른 타입으로 변환할 때 정확하게 이해하고 적용하는 것이 중요하다.
     /// TryParse 메소드를 적절히 사용함으로써 프로그램의 안정성을 높일 수 있다.
     /// </summary>
-    public class Class_8_2
+    public class Class2
     {
         public void Run()
         {
@@ -40,12 +40,41 @@ namespace Chapter1_Data
             int parsedInt = int.Parse(intString);
             Console.WriteLine($"Parse로 변환된 int 값: {parsedInt}");
 
+            // 잘못된 문자열을 int로 변환 시도
+            string invalidIntString = "123abc";
+            try
+            {
+                int invalidParsedInt = int.Parse(invalidIntString);
+                Console.WriteLine($"Parse로 변환된 잘못된 int 값: {invalidParsedInt}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"'{invalidIntString}'은 int로 파싱할 수 없습니다.");
+            }
 
             // 문자열을 double 타입으로 파싱 예제
             string doubleString = "123.45";
             double parsedDouble;
             bool isDoubleParseSuccessful = double.TryParse(doubleString, out parsedDouble);
-            Console.WriteLine(isDoubleParseSuccessful ? $"파싱된 double 값: {parsedDouble}" : "double로 파싱 실패");
+            Console.WriteLine(isDoubleParseSuccessful ? $"TryParse로 파싱된 double 값: {parsedDouble}" : "double로 파싱 실패");
+
+            // 잘못된 문자열을 double로 변환 시도
+            string invalidDoubleString = "abc123.45";
+            double invalidParsedDouble;
+            bool isInvalidDoubleParseSuccessful = double.TryParse(invalidDoubleString, out invalidParsedDouble);
+            Console.WriteLine(isInvalidDoubleParseSuccessful ? $"TryParse로 파싱된 잘못된 double 값: {invalidParsedDouble}" : $"'{invalidDoubleString}'은 double로 파싱할 수 없습니다.");
+
+            // 문자열을 DateTime 타입으로 파싱 예제
+            string dateString = "2024-01-01";
+            DateTime parsedDate;
+            bool isDateParseSuccessful = DateTime.TryParse(dateString, out parsedDate);
+            Console.WriteLine(isDateParseSuccessful ? $"TryParse로 파싱된 DateTime 값: {parsedDate.ToShortDateString()}" : "DateTime으로 파싱 실패");
+
+            // 잘못된 문자열을 DateTime으로 변환 시도
+            string invalidDateString = "not a date";
+            DateTime invalidParsedDate;
+            bool isInvalidDateParseSuccessful = DateTime.TryParse(invalidDateString, out invalidParsedDate);
+            Console.WriteLine(isInvalidDateParseSuccessful ? $"TryParse로 파싱된 잘못된 DateTime 값: {invalidParsedDate}" : $"'{invalidDateString}'은 DateTime으로 파싱할 수 없습니다.");
         }
     }
 }

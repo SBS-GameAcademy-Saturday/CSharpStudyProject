@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
+namespace CSharp_ProgramingStudy.Chapter4_CodeFlow
 {
     /// <summary>
     /// ref, out
@@ -43,7 +43,7 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
     /// 변수의 값을 효율적으로 관리하고 조작할 수 있는 방법을 제공합니다. 
     /// 이를 통해 프로그램의 유연성과 표현력을 높일 수 있습니다.
     /// </summary>
-    public class Class9
+    public class Class2
     {
         /// <summary>
         /// ref 키워드를 사용한 메서드. 변수의 참조를 전달받아 값을 변경한다.

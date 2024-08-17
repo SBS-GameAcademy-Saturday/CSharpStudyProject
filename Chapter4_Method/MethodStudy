@@ -1,0 +1,169 @@
+Method(메서드)에 대해 학습 자료를 구성할 때, 기본적인 정의와 활용 외에도 몇 가지 추가적인 주제와 개념을 포함할 수 있습니다. 아래는 Method에 대해 더 추가할 수 있는 내용들입니다:
+
+### 1. **메서드의 반환값 (Return Values)**
+   - **설명**: 메서드가 작업을 수행한 후 결과를 호출자에게 반환하는 방식입니다.
+   - **예제**:
+     ```csharp
+     public int Add(int a, int b)
+     {
+         return a + b;
+     }
+     ```
+
+### 2. **메서드 오버라이딩 (Method Overriding)**
+   - **설명**: 파생 클래스에서 기본 클래스의 메서드를 재정의하는 기법입니다. 주로 다형성을 구현할 때 사용됩니다.
+   - **예제**:
+     ```csharp
+     public class BaseClass
+     {
+         public virtual void Display()
+         {
+             Console.WriteLine("BaseClass Display");
+         }
+     }
+
+     public class DerivedClass : BaseClass
+     {
+         public override void Display()
+         {
+             Console.WriteLine("DerivedClass Display");
+         }
+     }
+     ```
+
+### 3. **메서드 숨기기 (Method Hiding)**
+   - **설명**: 기본 클래스의 메서드를 파생 클래스에서 `new` 키워드를 사용하여 숨길 수 있습니다.
+   - **예제**:
+     ```csharp
+     public class BaseClass
+     {
+         public void Show()
+         {
+             Console.WriteLine("BaseClass Show");
+         }
+     }
+
+     public class DerivedClass : BaseClass
+     {
+         public new void Show()
+         {
+             Console.WriteLine("DerivedClass Show");
+         }
+     }
+     ```
+
+### 4. **메서드 인라인 (Method Inlining)**
+   - **설명**: 메서드 호출을 줄이기 위해 컴파일러가 메서드 호출을 메서드 본문으로 대체하는 최적화 기술입니다.
+   - **예제**:
+     - 설명 위주로 기술하며, 메서드 인라인에 대한 직접적인 코드는 작성하지 않습니다.
+
+### 5. **메서드 체이닝 (Method Chaining)**
+   - **설명**: 여러 메서드를 연속적으로 호출하여 코드를 더 읽기 쉽게 만드는 기법입니다.
+   - **예제**:
+     ```csharp
+     public class FluentBuilder
+     {
+         private string _result;
+
+         public FluentBuilder Append(string value)
+         {
+             _result += value;
+             return this;
+         }
+
+         public FluentBuilder AppendLine(string value)
+         {
+             _result += value + "\n";
+             return this;
+         }
+
+         public string Build()
+         {
+             return _result;
+         }
+     }
+
+     // 사용
+     var result = new FluentBuilder()
+                      .Append("Hello")
+                      .AppendLine(" World")
+                      .Build();
+     ```
+
+### 6. **메서드의 선택적 매개변수와 명명된 매개변수 (Optional and Named Parameters)**
+   - **설명**: 메서드 호출 시 일부 매개변수를 생략하거나, 매개변수의 이름을 명시하여 호출하는 방법입니다.
+   - **예제**:
+     ```csharp
+     public void PrintMessage(string message = "Default Message")
+     {
+         Console.WriteLine(message);
+     }
+
+     // 호출
+     PrintMessage(); // Default Message
+     PrintMessage("Custom Message"); // Custom Message
+     ```
+
+### 7. **확장 메서드 (Extension Methods)**
+   - **설명**: 기존 클래스에 새로운 메서드를 추가할 수 있는 기능으로, 주로 정적 클래스에서 정의됩니다.
+   - **예제**:
+     ```csharp
+     public static class StringExtensions
+     {
+         public static int WordCount(this string str)
+         {
+             return str.Split(new[] { ' ', '.', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+         }
+     }
+
+     // 사용
+     string text = "Hello World!";
+     int count = text.WordCount(); // 2
+     ```
+
+### 8. **제네릭 메서드 (Generic Methods)**
+   - **설명**: 메서드가 데이터 타입에 의존하지 않도록 일반화하는 방법입니다.
+   - **예제**:
+     ```csharp
+     public T GetDefaultValue<T>()
+     {
+         return default(T);
+     }
+     ```
+
+### 9. **비동기 메서드 (Asynchronous Methods)**
+   - **설명**: `async`와 `await` 키워드를 사용하여 비동기 작업을 수행하는 메서드입니다.
+   - **예제**:
+     ```csharp
+     public async Task<int> FetchDataAsync()
+     {
+         await Task.Delay(1000); // 1초 대기
+         return 42;
+     }
+     ```
+
+### 10. **재귀 메서드 (Recursive Methods)**
+   - **설명**: 자기 자신을 호출하는 메서드로, 주로 반복적인 작업이나 분할 정복 알고리즘에서 사용됩니다.
+   - **예제**:
+     ```csharp
+     public int Factorial(int n)
+     {
+         if (n <= 1) return 1;
+         return n * Factorial(n - 1);
+     }
+     ```
+
+### 11. **클로저 (Closures)**
+   - **설명**: 메서드가 자신이 정의된 환경(변수)과 함께 저장되어 다른 메서드에서 호출될 수 있는 기능입니다.
+   - **예제**:
+     ```csharp
+     public Func<int, int> CreateMultiplier(int multiplier)
+     {
+         return x => x * multiplier;
+     }
+
+     var doubler = CreateMultiplier(2);
+     Console.WriteLine(doubler(5)); // 출력: 10
+     ```
+
+이러한 추가 주제들은 메서드의 다양한 기능과 활용 방법을 다루며, 이를 통해 학생들이 C#의 메서드 사용을 깊이 이해하고 다양한 상황에서 응용할 수 있도록 돕습니다. 각 주제는 기본적인 메서드 개념에서 확장된 내용으로, 학습 수준에 따라 점진적으로 추가해 나갈 수 있습니다.

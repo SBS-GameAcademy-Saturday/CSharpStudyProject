@@ -1,0 +1,128 @@
+문자열(String)은 C#에서 매우 중요한 데이터 타입 중 하나로, 다양한 방법으로 조작할 수 있습니다. 문자열을 다루는 데 있어서 알아두면 좋은 여러 가지 주제들이 있습니다. 아래에 문자열과 관련된 추가 학습 주제를 제안합니다:
+
+### 1. **문자열 연결 (String Concatenation)**
+   - **설명**: 문자열을 서로 연결하는 방법으로, `+` 연산자나 `String.Concat` 메서드를 사용합니다.
+   - **예제**:
+     ```csharp
+     string firstName = "John";
+     string lastName = "Doe";
+     string fullName = firstName + " " + lastName; // "John Doe"
+     Console.WriteLine(fullName);
+     ```
+
+### 2. **문자열 메서드 (String Methods)**
+   - **Length**: 문자열의 길이를 반환합니다.
+   - **Substring**: 문자열의 일부를 추출합니다.
+   - **IndexOf**: 특정 문자의 첫 번째 위치를 찾습니다.
+   - **ToUpper / ToLower**: 문자열을 대문자 또는 소문자로 변환합니다.
+   - **Trim**: 문자열의 앞뒤 공백을 제거합니다.
+   - **Replace**: 특정 문자열을 다른 문자열로 교체합니다.
+   - **Split**: 문자열을 특정 구분자를 기준으로 나누어 배열로 반환합니다.
+   - **예제**:
+     ```csharp
+     string text = " Hello, World! ";
+     Console.WriteLine(text.Length);           // 15
+     Console.WriteLine(text.Trim());           // "Hello, World!"
+     Console.WriteLine(text.ToUpper());        // " HELLO, WORLD! "
+     Console.WriteLine(text.Substring(1, 5));  // "Hello"
+     ```
+
+### 3. **문자열 비교 (String Comparison)**
+   - **Equals**: 문자열이 같은지 비교합니다.
+   - **Compare**: 두 문자열을 비교하여 정렬 순서를 반환합니다.
+   - **CompareTo**: 현재 인스턴스와 다른 문자열을 비교하여 정렬 순서를 반환합니다.
+   - **예제**:
+     ```csharp
+     string str1 = "Hello";
+     string str2 = "hello";
+     bool isEqual = str1.Equals(str2, StringComparison.OrdinalIgnoreCase); // 대소문자 구분 없이 비교
+     Console.WriteLine(isEqual); // True
+     ```
+
+### 4. **문자열 형식 지정 (String Formatting)**
+   - **String.Format**: 특정 형식에 따라 문자열을 구성합니다.
+   - **Composite Formatting**: `{index:format}` 형태로 사용하여 문자열을 포맷합니다.
+   - **예제**:
+     ```csharp
+     string formatted = string.Format("Name: {0}, Age: {1}", "John", 30);
+     Console.WriteLine(formatted); // "Name: John, Age: 30"
+     ```
+
+### 5. **Immutable 특성 (Immutable String)**
+   - **설명**: C#에서 문자열은 불변(immutable) 객체로, 문자열 조작 시 새로운 문자열 객체가 생성됩니다.
+   - **예제**:
+     ```csharp
+     string original = "Hello";
+     string modified = original + " World"; // 새로운 문자열 생성
+     Console.WriteLine(original); // "Hello"
+     ```
+
+### 6. **StringBuilder 클래스**
+   - **설명**: 문자열을 자주 변경해야 할 때는 `StringBuilder`를 사용하는 것이 더 효율적입니다. `StringBuilder`는 가변(mutable) 객체로, 메모리와 성능 측면에서 유리합니다.
+   - **예제**:
+     ```csharp
+     var sb = new System.Text.StringBuilder();
+     sb.Append("Hello");
+     sb.Append(" ");
+     sb.Append("World");
+     string result = sb.ToString(); // "Hello World"
+     Console.WriteLine(result);
+     ```
+
+### 7. **Escape 시퀀스 (Escape Sequences)**
+   - **설명**: 문자열 내에서 특수 문자를 표현하기 위해 사용합니다. 예를 들어 `\n`은 줄 바꿈, `\t`는 탭을 나타냅니다.
+   - **예제**:
+     ```csharp
+     string path = "C:\\Users\\John\\Documents";
+     string quote = "He said, \"Hello World!\"";
+     Console.WriteLine(path);  // C:\Users\John\Documents
+     Console.WriteLine(quote); // He said, "Hello World!"
+     ```
+
+### 8. **Raw 문자열 리터럴 (C# 11 이상)**
+   - **설명**: C# 11에서는 여러 줄의 텍스트를 포함할 수 있는 raw 문자열 리터럴이 도입되었습니다. 시작과 끝에 삼중 따옴표(`"""`)를 사용하여 이스케이프 시퀀스 없이도 그대로 문자열을 작성할 수 있습니다.
+   - **예제**:
+     ```csharp
+     string rawString = """
+     Line 1
+     Line 2
+     Line 3
+     """;
+     Console.WriteLine(rawString);
+     ```
+
+### 9. **Regular Expressions (정규 표현식)**
+   - **설명**: 정규 표현식을 사용하여 문자열의 패턴을 검색, 일치, 변환할 수 있습니다. `System.Text.RegularExpressions` 네임스페이스를 사용합니다.
+   - **예제**:
+     ```csharp
+     using System.Text.RegularExpressions;
+
+     string pattern = @"\d+";
+     string input = "The price is 100 dollars";
+     Match match = Regex.Match(input, pattern);
+
+     if (match.Success)
+     {
+         Console.WriteLine($"Found a number: {match.Value}");
+     }
+     ```
+
+### 10. **문자열 인코딩과 디코딩 (String Encoding and Decoding)**
+   - **설명**: 문자열 데이터를 특정 인코딩(예: UTF-8, ASCII)으로 변환하거나, 인코딩된 데이터를 문자열로 변환하는 방법입니다.
+   - **예제**:
+     ```csharp
+     byte[] utf8Bytes = System.Text.Encoding.UTF8.GetBytes("Hello");
+     string utf8String = System.Text.Encoding.UTF8.GetString(utf8Bytes);
+     Console.WriteLine(utf8String); // "Hello"
+     ```
+
+### 11. **문자열 검색 및 대체 (Search and Replace)**
+   - **설명**: 문자열 내에서 특정 패턴을 검색하거나 이를 다른 문자열로 대체하는 방법입니다.
+   - **예제**:
+     ```csharp
+     string text = "The quick brown fox jumps over the lazy dog.";
+     string replacedText = text.Replace("fox", "cat");
+     Console.WriteLine(replacedText); // "The quick brown cat jumps over the lazy dog."
+     ```
+
+이 주제들은 C#에서 문자열을 보다 효율적으로 다루는 데 도움이 되는 다양한 기법과 도구들을 포함하고 있습니다. 각 주제는 실용적이며, 실무에서 자주 사용되기 때문에 학습에 큰 도움이 될 것입니다.
