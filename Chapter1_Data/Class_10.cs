@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// C#에서 제공하는 비교 연산자의 사용법을 이해한다.

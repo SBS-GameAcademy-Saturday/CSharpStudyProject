@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// Raw 문자열 리터럴 학습 자료 (C# 11 이상)

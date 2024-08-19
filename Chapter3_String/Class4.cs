@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// String Comparison (문자열 비교) 학습 자료

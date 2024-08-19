@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// 2진수, 10진수, 16진수

@@ -1,58 +1,90 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter3_OOP
+namespace CSharp_ProgramingStudy.Chapter5_OOP
 {
     /// <summary>
-    /// 스택과 힙
-    /// 목표: 스택과 힙 메모리 영역의 차이점과 각각에서 데이터가 어떻게 관리되는지 이해한다.
-    /// 설명: 스택은 컴파일 시간에 크기가 결정되는 값 타입 데이터를 저장하고, 힙은 런타임에 할당되는 참조 타입 데이터를 저장한다.
-    /// 스택 메모리 영역:
-    /// - 스택은 자동으로 할당되고 해제되는 지역 변수를 저장하는 LIFO(Last In, First Out) 구조의 메모리 영역입니다.
-    /// - 스택은 메서드 호출 시 메서드에 대한 지역 변수와 매개변수를 저장합니다.
-    /// - 스택 메모리는 컴파일 시간에 크기가 결정되며, 주로 값 타입의 데이터(int, double, bool 등)를 저장합니다.
-    /// - 스택은 빠른 액세스 속도를 제공하며, 자동 메모리 관리의 이점이 있습니다.
-    /// - 하지만, 스택의 크기는 제한적이므로, 너무 많은 메모리 사용 시 스택 오버플로우가 발생할 수 있습니다.
+    /// 복사(값)와 참조
+    /// 목표: 값 타입과 참조 타입의 차이를 이해하고, C#에서의 동작 방식을 학습한다.
+    /// 값 타입(Value Type)은 데이터를 직접 저장하며, 참조 타입(Reference Type)은 데이터가 저장된 메모리의 주소를 저장한다.
+    /// 이 클래스는 값 타입과 참조 타입의 차이를 보여주는 간단한 예제를 제공한다.
     /// 
-    /// 힙 메모리 영역:
-    /// - 힙은 런타임에 동적으로 할당되는 메모리 영역으로, 참조 타입의 데이터(예: 클래스 인스턴스)를 저장합니다.
-    /// - 힙에 저장된 데이터는 프로그래머가 직접 관리해야 하며, C#에서는 가비지 컬렉터가 메모리 관리를 돕습니다.
-    /// - 힙은 유연한 메모리 관리를 가능하게 하지만, 스택에 비해 상대적으로 느린 액세스 속도와 메모리 해제에 대한 책임이 있습니다.
+    /// 복사와 참조 설명:
+    /// 값 타입(Value Type): 
+    /// 값 타입은 변수가 직접 데이터를 저장합니다. 
+    /// 정수형(int), 부동 소수점(float, double), 구조체(struct) 등이 여기에 해당합니다. 
+    /// 값 타입의 변수를 다른 변수에 할당하면, 데이터의 복사본이 생성되어 
+    /// 서로 독립적인 메모리 공간에 저장됩니다. 
+    /// 따라서, 하나의 변수를 변경해도 다른 변수에는 영향을 미치지 않습니다.
     /// 
-    /// 스택과 힙의 이해는 메모리 관리와 프로그램 성능 최적화에 매우 중요합니다. 각 메모리 영역의 특성을 고려하여
-    /// 적절한 데이터 타입을 선택하고, 효율적인 메모리 사용 전략을 수립하는 것이 권장됩니다.
+    /// 참조 타입(Reference Type): 
+    /// 참조 타입은 메모리 내의 객체나 데이터 구조를 가리키는 참조(주소)를 저장합니다. 
+    /// 클래스(class), 배열(array), 인터페이스(interface) 등이 참조 타입에 속합니다. 
+    /// 참조 타입의 변수를 다른 변수에 할당하면, 원본 데이터의 주소가 복사되므로 
+    /// 두 변수는 같은 객체나 데이터 구조를 가리킵니다. 
+    /// 이로 인해 한 변수를 통해 객체를 변경하면, 
+    /// 다른 변수를 통해서도 변경된 상태를 볼 수 있습니다.
+    /// 
+    /// C# 프로그래밍에서 값 타입과 참조 타입의 이해는 데이터의 저장, 전달, 
+    /// 복사 방식을 제어하는 데 중요합니다. 
+    /// 각 타입의 특성을 이해하고 적절히 사용하는 것은 프로그램의 
+    /// 효율성과 안정성을 보장하는 데 필수적입니다.
+    /// 
     /// </summary>
-    public class Class3
+    public class Class2
     {
+        // 구조체 정의
+        struct Point
+        {
+            public int X;
+            public int Y;
+
+            public Point(int x, int y)
+            {
+                X = x;
+                Y = y;
+            }
+
+            public void Display()
+            {
+                Console.WriteLine($"Point({X}, {Y})");
+            }
+        }
+
+        // 참조 타입 클래스 정의
         class Car
         {
-            public string Model { get; set; }
-        }
-
-        private void StackExample()
-        {
-            int value1 = 10; // 스택에 저장된 지역 변수
-            int value2 = value1; // 스택에 복사본이 생성됨
-            value2 = 20; // value2의 값을 변경해도 value1에 영향을 미치지 않음
-            Console.WriteLine($"StackExample: value1 = {value1}"); // 출력: 10
-        }
-
-        private void HeapExample()
-        {
-            var car1 = new Car { Model = "Honda" }; // 힙에 저장된 객체
-            var car2 = car1; // car1의 참조(주소)를 car2에 복사
-            car2.Model = "Ford"; // car2를 통해 객체의 Model을 변경하면 car1을 통해서도 변경된 상태를 볼 수 있음
-            Console.WriteLine($"HeapExample: car1.Model = {car1.Model}"); // 출력: Ford
+            public string model;
+            public void Drive()
+            {
+                Console.WriteLine(model + " is driving.");
+            }
         }
 
         public void Run()
         {
-            // 스택 사용 예제
-            StackExample();
+            // 값 타입 예시
+            int a = 10;
+            int b = a; // 'a'의 값을 'b'에 복사한다. 'a'와 'b'는 독립적인 메모리 공간을 가진다.
+            b = 20; // 'b'의 값을 변경해도 'a'에는 영향을 미치지 않는다.
+            Console.WriteLine($"Value Type Example: a = {a}, b = {b}"); // 출력: a = 10, b = 20
 
-            // 힙 사용 예제
-            HeapExample();
+            // 구조체 예시 (값 타입)
+            Point p1 = new Point(1, 2);
+            Point p2 = p1; // p1의 값을 p2에 복사한다. p1과 p2는 독립적인 메모리 공간을 가진다.
+            p2.X = 5; // p2의 값을 변경해도 p1에는 영향을 미치지 않는다.
+            Console.WriteLine("Struct Example:");
+            p1.Display(); // 출력: Point(1, 2)
+            p2.Display(); // 출력: Point(5, 2)
+
+            // 참조 타입 예시
+            Car car1 = new Car();
+            car1.model = "Honda";
+            Car car2 = car1; // 'car1'의 참조(주소)를 'car2'에 복사한다. 'car1'과 'car2'는 같은 객체를 가리킨다.
+            car2.model = "Ford"; // 'car2'를 통해 객체의 'model'을 변경하면, 'car1'을 통해서도 변경된 값을 볼 수 있다.
+            Console.WriteLine($"Reference Type Example: car1.model = {car1.model}, car2.model = {car2.model}"); // 출력: car1.model = Ford, car2.model = Ford
         }
     }
 }

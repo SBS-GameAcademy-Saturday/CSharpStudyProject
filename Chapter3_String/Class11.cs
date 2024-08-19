@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// 문자열 검색 및 대체 (Search and Replace) 학습 자료

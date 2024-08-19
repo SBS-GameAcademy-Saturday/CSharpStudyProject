@@ -1,78 +1,96 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter5_Extension
+namespace CSharp_ProgramingStudy.Chapter7_Extension
 {
-    /// <summary>
-    /// Event (이벤트)
-    /// 목표: 이벤트를 사용하여 특정 상황이 발생했을 때 알림을 받는 방법을 이해한다.
-    /// 
-    /// 이벤트(Event)는 C#에서 객체나 클래스가 특정 상황이 발생했음을 다른 객체에 알리는 메커니즘을 제공합니다. 
-    /// 이벤트를 사용하면 이벤트를 발생시키는 객체(발행자, Publisher)와 이벤트에 반응하여 
-    /// 특정 작업을 수행하는 객체(구독자, Subscriber) 사이의 소통이 가능해집니다. 
-    /// 이벤트는 대리자(Delegate)를 기반으로 하며, 이벤트 처리를 위한 메서드(이벤트 핸들러)를 이벤트에 연결하고, 
-    /// 특정 조건이 만족될 때 이벤트를 발생시켜 연결된 메서드가 호출되도록 합니다.
-    /// 
-    /// 이벤트의 주요 특징:
-    /// 1, 캡슐화: 이벤트는 대리자를 기반으로 하지만, 이벤트는 외부에서 직접 호출할 수 없으며, 
-    /// 오직 이벤트를 정의한 클래스 내에서만 발생시킬 수 있습니다. 
-    /// 이를 통해 이벤트의 사용을 캡슐화하고, 클래스 외부에서 이벤트의 발생을 제어하는 것을 방지합니다.
-    /// /// 
-    /// 2, 구독 및 해지: 이벤트에 대한 구독은 += 연산자를 사용하여 이벤트 핸들러를 추가함으로써 이루어지며, 
-    /// -= 연산자를 사용하여 구독을 해지할 수 있습니다.
-    /// 
-    /// 3, 알림 메커니즘: 이벤트는 클래스나 객체가 특정 상황을 외부에 알릴 필요가 있을 때 사용됩니다. 
-    /// 예를 들어, 사용자의 클릭, 데이터의 변경, 타이머의 만료 등 다양한 상황에서 이벤트를 사용할 수 있습니다.
-    /// </summary>
-    public class Class5
+  /// <summary>
+  /// Action과 Func는 대리자(delegate)를 사용하는 강력하고 유연한 방식을 제공합니다.
+  /// 이 두 가지는 특히 람다 표현식과 함께 사용할 때 코드를 간결하고 명확하게 만들어 주며,
+  /// 개발자가 보다 함수적인 접근 방식을 취할 수 있도록 도와줍니다.
+  /// 아래에서는 Action과 Func의 기본적인 개념, 차이점, 그리고 사용 예제를 다룹니다.
+
+  /// Action 대리자는 반환 값이 없는 메서드를 캡슐화합니다.
+  /// 다시 말해, Action은 void를 반환하는 메서드에 사용됩니다.
+  /// Action은 최대 16개의 매개변수를 받을 수 있습니다. 매개변수가 없는 경우부터 시작하여,
+  /// Action<T1, T2, ..., T16>까지 다양한 형태를 지원합니다.
+  /// 기본 사용 예:
+  ///    Action greet = () => Console.WriteLine("Hello, World!"); // 반환 값이 없는 메서드를 캡슐화한 Action 대리자
+  ///    greet(); // "Hello, World!" 출력
+  // 매개변수가 있는 사용 예:
+  ///    Action<string, string> printNames = (firstName, lastName) =>
+  ///    Console.WriteLine($"First name: {firstName}, Last name: {lastName}"); // 두 개의 매개변수를 받는 Action 대리자
+  ///    printNames("Jane", "Doe"); // "First name: Jane, Last name: Doe" 출력
+
+  /// 반면, Func 대리자는 반환 값이 있는 메서드를 캡슐화합니다.
+  /// Func의 마지막 제네릭 타입은 항상 메서드의 반환 타입을 나타냅니다.
+  /// Func 역시 최대 16개의 매개변수까지 지원하고, Func<TResult>부터 Func<T1, T2, ..., T16, TResult>까지 다양한 조합을 가질 수 있습니다.
+
+  /// 기본 사용 예:
+  ///   Func<int, int, int> add = (x, y) => x + y; // 두 정수를 더하고 그 결과를 반환하는 Func 대리자
+  ///   int result = add(5, 3); // 5 + 3 = 8
+  ///   Console.WriteLine(result);  // 출력: 8
+  /// 
+  /// 매개변수가 여러 개인 사용 예:
+  /// 
+  ///   Func<double, double, double, double> volume = (x, y, z) => x * y * z; // 세 개의 double 타입 값을 곱하여 부피를 계산하는 Func 대리자
+  ///   double boxVolume = volume(3.0, 4.5, 5.0); // 3.0 * 4.5 * 5.0 = 67.5
+  ///   Console.WriteLine(boxVolume);  // 출력: 67.5
+  /// 
+  /// 차이점:
+  /// Action과 Func의 주된 차이점은 Action이 반환 값을 갖지 않는다는 것이고,
+  /// Func는 반드시 반환 값을 요구한다는 점입니다.
+  /// 이는 두 대리자를 사용하는 상황에 영향을 미칩니다.
+  /// 예를 들어, 어떤 작업을 수행만 하고 결과를 반환할 필요가 없는 경우 Action을 사용하며,
+  /// 계산이 필요하고 그 결과를 반환해야 할 때는 Func을 사용합니다.
+  /// </summary>
+  class Class5
+  {
+
+    // 인사를 출력하는 메서드 (Action 예제)
+    static void GreetMessage()
     {
-        public class MyEventArgs : EventArgs
-        {
-            public MyEventArgs(string message) { Message = message; }
-            public string Message { get; set; }
-        }
-
-        public class Publisher
-        {
-            public event EventHandler<MyEventArgs> RaiseCustomEvent;
-
-            protected virtual void OnRaiseCustomEvent(MyEventArgs e)
-            {
-                EventHandler<MyEventArgs> handler = RaiseCustomEvent;
-                handler?.Invoke(this, e);
-            }
-
-            public void DoSomething()
-            {
-                OnRaiseCustomEvent(new MyEventArgs("Event triggered"));
-            }
-        }
-
-        public class Subscriber
-        {
-            private string id;
-            public Subscriber(string ID, Publisher pub)
-            {
-                id = ID;
-                pub.RaiseCustomEvent += HandleCustomEvent;
-            }
-
-            void HandleCustomEvent(object sender, MyEventArgs e)
-            {
-                Console.WriteLine($"{id} received this message: {e.Message}");
-            }
-        }
-
-        public void Run()
-        {
-            Publisher pub = new Publisher();
-            Subscriber sub1 = new Subscriber("Subscriber 1", pub);
-            Subscriber sub2 = new Subscriber("Subscriber 2", pub);
-
-            // 이벤트 발생
-            pub.DoSomething();
-        }
+      Console.WriteLine("Hello, World!");
     }
+
+    // 이름을 출력하는 메서드 (Action 예제)
+    static void PrintName(string name)
+    {
+      Console.WriteLine("Name: " + name);
+    }
+
+    // 두 숫자를 더하는 메서드 (Func 예제)
+    static int AddNumbers(int x, int y)
+    {
+      return x + y;
+    }
+
+    // 숫자가 짝수인지 홀수인지 확인하는 메서드 (Func 예제)
+    static string CheckOddEven(int number)
+    {
+      if (number % 2 == 0)
+        return "Even";
+      else
+        return "Odd";
+    }
+
+    static void Run()
+    {
+      // Action 예제: 인사를 출력하는 메서드를 참조하는 대리자
+      Action greet = new Action(GreetMessage);
+      greet(); // "Hello, World!" 출력
+
+      // Action 예제: 이름을 출력하는 메서드를 참조하는 대리자
+      Action<string> printName = new Action<string>(PrintName);
+      printName("Alice"); // "Name: Alice" 출력
+
+      // Func 예제: 두 숫자를 더하는 메서드를 참조하는 대리자
+      Func<int, int, int> add = new Func<int, int, int>(AddNumbers);
+      int sum = add(2, 3); // 2 + 3 = 5
+      Console.WriteLine("Sum: " + sum); // "Sum: 5" 출력
+
+      // Func 예제: 숫자가 짝수인지 홀수인지 확인하는 메서드를 참조하는 대리자
+      Func<int, string> checkOddEven = new Func<int, string>(CheckOddEven);
+      string result = checkOddEven(4); // 4는 짝수
+      Console.WriteLine("4 is: " + result); // "4 is: Even" 출력
+    }
+  }
 }

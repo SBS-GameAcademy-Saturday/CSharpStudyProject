@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// 부동 소수점 수의 표현과 float 데이터 타입의 사용법을 이해한다.

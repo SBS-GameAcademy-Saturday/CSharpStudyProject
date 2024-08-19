@@ -3,48 +3,71 @@ using System.Text;
 using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
-
-class Program
+namespace ProgramClass
 {
-    static void Main(string[] args)
+    class Program
     {
-        // 문자열을 UTF-8로 인코딩하는 예제
-        string originalString = "Hello, World!";
-        byte[] utf8Bytes = Encoding.UTF8.GetBytes(originalString);
+        // 간단한 이벤트 예제: 버튼 클릭
+        public class Button
+        {
+            // 이벤트 선언: 버튼이 클릭되었음을 알리는 이벤트
+            public event EventHandler ButtonClicked;
 
-        // 인코딩된 바이트 배열을 다시 문자열로 디코딩하는 예제
-        string utf8String = Encoding.UTF8.GetString(utf8Bytes);
+            // 버튼 클릭 메서드
+            public void Click()
+            {
+                Console.WriteLine("Button was clicked!");
 
-        // 결과 출력
-        Console.WriteLine("Original String: " + originalString);  // 출력: Hello, World!
-        Console.WriteLine("UTF-8 Encoded Bytes: " + BitConverter.ToString(utf8Bytes));
-        Console.WriteLine("Decoded String: " + utf8String);  // 출력: Hello, World!
+                // 이벤트 발생
+                OnButtonClicked(EventArgs.Empty);
+            }
 
-        // 추가 설명:
-        // - Encoding.UTF8.GetBytes: 문자열을 UTF-8 형식으로 인코딩하여 바이트 배열로 변환합니다.
-        // - Encoding.UTF8.GetString: UTF-8로 인코딩된 바이트 배열을 다시 문자열로 디코딩합니다.
-        // - 인코딩은 데이터를 전송하거나 저장할 때, 다양한 시스템 간에 일관된 데이터 표현을 위해 필요합니다.
-        // - 디코딩은 인코딩된 데이터를 원래의 문자열 형식으로 복원하는 과정입니다.
+            // 이벤트 발생 메서드
+            protected virtual void OnButtonClicked(EventArgs e)
+            {
+                // 이벤트가 구독된 경우에만 실행
+                if (ButtonClicked != null)
+                {
+                    ButtonClicked(this, e);
+                }
+            }
+        }
 
-        // ASCII 인코딩 및 디코딩 예제
-        byte[] asciiBytes = Encoding.ASCII.GetBytes(originalString);
-        string asciiString = Encoding.ASCII.GetString(asciiBytes);
+        // 구독자(Subscriber) 클래스
+        public class Subscriber
+        {
+            private string name;
 
-        Console.WriteLine("ASCII Encoded Bytes: " + BitConverter.ToString(asciiBytes));
-        Console.WriteLine("Decoded ASCII String: " + asciiString);  // 출력: Hello, World!
+            // 생성자에서 버튼의 클릭 이벤트를 구독
+            public Subscriber(string name, Button button)
+            {
+                this.name = name;
+                button.ButtonClicked += HandleButtonClick;
+            }
 
-        // 추가 설명:
-        // - ASCII 인코딩은 7비트 인코딩을 사용하여 영어 알파벳과 숫자, 몇몇 특수 문자를 표현합니다.
-        // - UTF-8은 유니코드를 기반으로 하며, 전 세계의 모든 문자를 표현할 수 있습니다.
-        // - ASCII는 주로 영어 텍스트에 사용되며, UTF-8은 다양한 언어를 지원하는 범용 인코딩 방식입니다.
+            // 이벤트 핸들러 메서드: 버튼이 클릭되었을 때 실행
+            void HandleButtonClick(object sender, EventArgs e)
+            {
+                Console.WriteLine($"{name} received the ButtonClicked event.");
+            }
+        }
 
-        // 바이트 배열의 내용을 16진수 문자열로 출력하는 방법
-        Console.WriteLine("UTF-8 Encoded Bytes (Hex): " + BitConverter.ToString(utf8Bytes));
-        Console.WriteLine("ASCII Encoded Bytes (Hex): " + BitConverter.ToString(asciiBytes));
 
-        // 인코딩된 바이트를 다른 인코딩으로 디코딩할 경우 발생하는 문제
-        string incorrectDecodedString = Encoding.UTF7.GetString(utf8Bytes);
-        Console.WriteLine("Incorrect Decoded String (using UTF-7): " + incorrectDecodedString);
-        // 출력: 다른 인코딩으로 디코딩하면 예상치 못한 결과가 나올 수 있습니다.
+        public static void Run()
+        {
+            // 버튼 인스턴스 생성
+            Button button = new Button();
+
+            // 두 구독자(Subscriber) 생성 및 버튼 클릭 이벤트 구독
+            Subscriber sub1 = new Subscriber("Subscriber 1", button);
+            Subscriber sub2 = new Subscriber("Subscriber 2", button);
+
+            // 버튼 클릭
+            button.Click();
+        }
+        static void Main(string[] args)
+        {
+            Run();
+        }
     }
 }

@@ -3,93 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter4_DataStructure
+namespace CSharp_ProgramingStudy.Chapter6_DataStructure
 {
     /// <summary>
-    /// List
-    /// 목표: List를 사용하여 동적으로 크기가 조정되는 배열을 생성하고 관리하는 방법을 학습한다.
+    /// Dictionary
+    /// 목표: Dictionary를 사용하여 키-값 쌍을 저장하는 방법을 이해한다.
     /// 
-    /// List<T>는 C#에서 제공하는 제네릭 컬렉션의 일종으로, 
-    /// 동적으로 크기가 조정되는 배열을 생성하고 관리할 수 있습니다. 
-    /// System.Collections.Generic 네임스페이스에 정의되어 있으며, 
-    /// 배열과 유사하게 인덱스를 통해 각 요소에 접근할 수 있지만, 
-    /// 크기가 고정되어 있지 않아 요소를 추가하거나 제거할 때 자동으로 크기가 조절됩니다.
+    /// Dictionary<TKey, TValue>는 C#의 System.Collections.Generic 네임스페이스에 있는 제네릭 컬렉션의 일종으로, 
+    /// 키와 값의 쌍으로 데이터를 저장합니다. 각 키는 컬렉션 내에서 유일해야 하며, 
+    /// 이를 통해 효율적인 데이터 검색, 추가, 수정, 삭제 작업을 수행할 수 있습니다.
     /// 
-    /// List의 주요 특징
-    /// 동적 크기 조정: List<T>는 요소를 추가하거나 제거할 때 내부 배열의 크기를 자동으로 조정합니다. 
-    /// 이로 인해 사용자는 컬렉션의 크기를 걱정하지 않고 요소를 관리할 수 있습니다.
+    /// Dictionary의 주요 특징:
+    /// 1. 키-값 쌍: 데이터는 키(Key)와 값(Value)의 쌍으로 저장됩니다. 키를 통해 빠르게 값을 검색할 수 있습니다.
+    /// 2. 제네릭: Dictionary<TKey, TValue>는 제네릭을 사용하여 다양한 타입의 키와 값을 저장할 수 있습니다.
+    /// 3. 고유한 키: 키는 컬렉션 내에서 고유해야 하며, 중복된 키를 추가하려고 하면 예외가 발생합니다.
+    /// 4. 동적 크기 조정: 요소를 추가하거나 제거할 때 컬렉션의 크기가 동적으로 조정됩니다.
     /// 
-    /// 제네릭: List<T>는 제네릭을 사용하여 다양한 타입의 객체를 저장할 수 있습니다. 
-    /// 여기서 T는 리스트에 저장될 요소의 타입을 나타냅니다.
-    /// 인덱스 접근: 배열과 마찬가지로 List<T>의 요소에는 인덱스를 통해 접근할 수 있으며, 인덱스는 0부터 시작합니다.
-    /// 
-    /// 다양한 메서드 지원: List<T> 클래스는 요소를 추가, 삭제, 검색, 정렬하는 등 다양한 메서드를 제공합니다.
     /// 주요 메서드 및 속성:
-    /// Add(T item): 리스트의 끝에 새 요소를 추가합니다.
-    /// Remove(T item): 리스트에서 첫 번째로 일치하는 요소를 제거합니다.
-    /// RemoveAt(int index): 지정된 인덱스에 있는 요소를 제거합니다.
-    /// Insert(int index, T item): 지정된 인덱스에 요소를 삽입합니다.
-    /// Clear(): 리스트의 모든 요소를 제거합니다.
-    /// Count: 리스트에 있는 요소의 수를 반환합니다.
-    /// Contains(T item): 리스트에 특정 요소가 포함되어 있는지 확인합니다.
-    /// Sort(): 리스트의 요소를 정렬합니다.
+    /// - Add(TKey key, TValue value): 새 키-값 쌍을 딕셔너리에 추가합니다.
+    /// - Remove(TKey key): 지정된 키를 가진 요소를 제거합니다.
+    /// - ContainsKey(TKey key): 딕셔너리에 특정 키가 있는지 확인합니다.
+    /// - TryGetValue(TKey key, out TValue value): 특정 키에 해당하는 값을 가져오려고 시도하며, 성공 여부를 반환합니다.
+    /// - Count: 딕셔너리에 있는 키-값 쌍의 수를 반환합니다.
     /// </summary>
     public class Class4
     {
         public void Run()
         {
-            // 문자열 리스트 생성
-            List<string> fruits = new List<string>();
+            // 문자열 키와 문자열 값을 가지는 Dictionary 생성
+            Dictionary<string, string> capitals = new Dictionary<string, string>();
 
-            // 요소 추가
-            fruits.Add("Apple");
-            fruits.Add("Banana");
-            fruits.Add("Cherry");
+            // 키-값 쌍 추가
+            capitals.Add("South Korea", "Seoul");
+            capitals.Add("United States", "Washington D.C.");
+            capitals.Add("United Kingdom", "London");
 
-            // 인덱스를 통한 요소 접근
-            Console.WriteLine($"Second fruit: {fruits[1]}"); // 출력: Banana
+            // 키를 통한 값 접근
+            Console.WriteLine($"The capital of South Korea is {capitals["South Korea"]}"); // 출력: Seoul
 
-            // 리스트의 요소 순회
-            Console.WriteLine("Listing all fruits:");
-            foreach (string fruit in fruits)
+            // 딕셔너리 순회
+            Console.WriteLine("Dictionary contents:");
+            foreach (var kvp in capitals)
             {
-                Console.WriteLine(fruit);
+                Console.WriteLine($"Country: {kvp.Key}, Capital: {kvp.Value}");
             }
 
-            // 요소 제거
-            fruits.Remove("Banana"); // "Banana" 요소 제거
-            Console.WriteLine("After removing 'Banana':");
-            foreach (string fruit in fruits)
+            // 키 존재 여부 확인
+            if (capitals.ContainsKey("France"))
             {
-                Console.WriteLine(fruit);
+                Console.WriteLine($"The capital of France is {capitals["France"]}");
+            }
+            else
+            {
+                Console.WriteLine("France is not in the dictionary.");
             }
 
-            // 요소 삽입
-            fruits.Insert(1, "Mango"); // 인덱스 1에 "Mango" 삽입
-            Console.WriteLine("After inserting 'Mango':");
-            foreach (string fruit in fruits)
+            // 키에 해당하는 값 가져오기
+            if (capitals.TryGetValue("United Kingdom", out string capital))
             {
-                Console.WriteLine(fruit);
+                Console.WriteLine($"The capital of the United Kingdom is {capital}");
             }
 
-            // 리스트 크기 확인
-            Console.WriteLine($"Number of fruits: {fruits.Count}"); // 출력: 현재 리스트의 요소 수
+            // 키-값 쌍 제거
+            capitals.Remove("United States");
 
-            // 리스트의 특정 요소 포함 여부 확인
-            Console.WriteLine($"Contains 'Apple': {fruits.Contains("Apple")}"); // "Apple"이 리스트에 있는지 확인
-
-            // 리스트 정렬
-            fruits.Sort();
-            Console.WriteLine("Fruits after sorting:");
-            foreach (string fruit in fruits)
+            // 삭제 후 Dictionary 순회
+            Console.WriteLine("After removing 'United States':");
+            foreach (var kvp in capitals)
             {
-                Console.WriteLine(fruit);
+                Console.WriteLine($"Country: {kvp.Key}, Capital: {kvp.Value}");
             }
 
-            // 리스트의 모든 요소 제거
-            fruits.Clear();
-            Console.WriteLine($"Number of fruits after clearing: {fruits.Count}"); // 출력: 0
+            // 딕셔너리의 총 키-값 쌍 수 출력
+            Console.WriteLine($"Total number of entries: {capitals.Count}");
         }
-
     }
 }

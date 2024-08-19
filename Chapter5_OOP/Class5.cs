@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter3_OOP
+namespace CSharp_ProgramingStudy.Chapter5_OOP
 {
     /// <summary>
     /// static의 정체

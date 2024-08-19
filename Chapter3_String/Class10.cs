@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// 문자열 인코딩과 디코딩 (String Encoding and Decoding) 학습 자료

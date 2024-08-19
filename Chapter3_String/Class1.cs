@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
     /// <summary>
     /// 문자열 포맷팅을 사용하여 데이터를 보기 좋게 표시하는 방법을 이해한다.

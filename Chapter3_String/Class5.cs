@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// Immutable String (불변 문자열) 학습 자료

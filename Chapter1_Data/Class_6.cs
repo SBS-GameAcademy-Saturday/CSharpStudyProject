@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// 불리언 데이터 타입과 조건문에서의 사용을 이해한다.

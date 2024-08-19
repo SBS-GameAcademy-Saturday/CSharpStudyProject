@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// AND, OR, NOT과 같은 논리 연산자의 사용과 조건문에서의 응용을 이해한다.

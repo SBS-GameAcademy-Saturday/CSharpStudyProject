@@ -3,61 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter3_OOP
+namespace CSharp_ProgramingStudy.Chapter5_OOP
 {
     /// <summary>
-    /// 다형성
-    /// 목표: 메소드 오버라이딩을 통해 다형성을 구현하는 방법을 학습한다.
+    /// 클래스 형식 변환
+    /// 목표: 상속 관계에 있는 클래스 간의 형식 변환을 이해한다.
     /// 
-    /// 다형성(Polymorphism)은 객체 지향 프로그래밍의 핵심 원칙 중 하나로, 
-    /// "많은 형태를 가질 수 있는 능력"을 의미합니다. 
-    /// 다형성은 같은 인터페이스나 메서드 호출이 서로 다른 객체 타입에 대해 서로 다른 동작을 할 수 있게 해줍니다. 
-    /// 이를 통해 코드의 유연성과 재사용성을 높일 수 있습니다.
+    /// 클래스 형식 변환은 객체 지향 프로그래밍에서 상속 관계에 있는 클래스 간에 이루어지는 형 변환을 말합니다. 
+    /// 이러한 변환을 통해, 하나의 객체를 다른 클래스 타입으로 취급할 수 있으며, 
+    /// 이는 다형성(Polymorphism)의 중요한 부분을 이룹니다. 
+    /// 클래스 형식 변환에는 주로 업캐스팅(Upcasting)과 다운캐스팅(Downcasting)이 있습니다.
     /// 
-    /// C#에서 다형성은 주로 메서드 오버라이딩(Method Overriding)을 통해 구현됩니다. 
-    /// 메서드 오버라이딩은 상속 관계에 있는 클래스에서 부모 클래스에 정의된 메서드를 자식 클래스에서 재정의하는 것을 말합니다.
+    /// 업캐스팅(Upcasting)
+    /// 업캐스팅은 서브 클래스의 인스턴스를 슈퍼 클래스 타입으로 변환하는 것을 말합니다. 
+    /// 이 변환은 항상 안전하며, 명시적으로 형 변환 연산자를 사용하지 않아도 자동으로 이루어집니다. 
+    /// 업캐스팅을 통해, 서브 클래스 객체를 슈퍼 클래스의 참조로 사용할 수 있습니다.
     /// 
-    /// 메서드 오버라이딩(Method Overriding)
-    /// virtual 메서드: 
-    /// 부모 클래스에서 메서드를 정의할 때 virtual 키워드를 사용하면, 
-    /// 이 메서드는 자식 클래스에서 오버라이드될 수 있습니다. 
-    /// virtual 메서드는 기본적인 동작을 제공하며, 
-    /// 필요에 따라 자식 클래스에서 변경할 수 있습니다.
-    /// 
-    /// override 메서드: 
-    /// 자식 클래스에서 부모 클래스의 virtual 메서드를 재정의할 때 override 키워드를 사용합니다. 
-    /// 이를 통해 메서드의 동작을 자식 클래스에 맞게 변경할 수 있습니다.
-    /// 
-    /// 다형성의 장점:
-    /// 1, 코드의 유연성: 다형성을 사용하면 한 인터페이스로 다양한 객체의 메서드를 호출할 수 있어, 코드의 유연성이 증가합니다.
-    /// 2, 재사용성 및 확장성: 기존 코드를 수정하지 않고도 새로운 클래스를 추가하거나 기존 클래스를 확장할 수 있어, 
-    ///                         코드의 재사용성과 확장성이 높아집니다.                     
-    /// 3, 유지 보수성: 코드의 중복을 줄이고, 변경에 대한 영향을 최소화하여 유지 보수성을 향상시킵니다.
+    /// 다운캐스팅(Downcasting)
+    /// 다운캐스팅은 업캐스팅의 반대 과정으로, 
+    /// 슈퍼 클래스 타입의 객체를 서브 클래스 타입으로 변환하는 것을 말합니다. 
+    /// 이 변환은 명시적으로 형 변환 연산자를 사용해야 하며, 
+    /// 변환하는 타입이 실제 객체의 타입과 호환되지 않으면 런타임에 오류가 발생할 수 있습니다. 
+    /// 따라서, 다운캐스팅은 타입 호환성을 확인한 후에 수행해야 합니다.
     /// </summary>
     public class Class9
     {
         class Animal
         {
-            public virtual void animalSound()
+            public void Eat()
             {
-                Console.WriteLine("The animal makes a sound");
-            }
-        }
-
-        class Pig : Animal
-        {
-            public override void animalSound()
-            {
-                Console.WriteLine("The pig says: wee wee");
+                Console.WriteLine("Animal is eating.");
             }
         }
 
         class Dog : Animal
         {
-            public override void animalSound()
+            public void Bark()
             {
-                Console.WriteLine("The dog says: bow wow");
+                Console.WriteLine("Dog is barking.");
             }
+        }
+
+        public void Run()
+        {
+            // 업캐스팅 예시: Dog 객체를 Animal 타입으로 변환
+            Dog dog = new Dog();
+            Animal animal = dog; // 업캐스팅, 자동으로 이루어짐
+            animal.Eat(); // 상속받은 메서드 호출 가능
+
+            // 다운캐스팅 예시: Animal 타입을 Dog 타입으로 변환
+            Animal animal2 = new Dog();
+            Dog dog2 = (Dog)animal2; // 다운캐스팅, 명시적 형 변환 필요
+            dog2.Bark(); // Dog 클래스의 메서드 호출 가능
         }
     }
 }

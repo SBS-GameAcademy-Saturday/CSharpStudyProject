@@ -3,67 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter3_OOP
+namespace CSharp_ProgramingStudy.Chapter5_OOP
 {
     /// <summary>
-    /// 문자열 둘러보기
-    /// 목표: C#에서 문자열을 다루는 다양한 방법과 문자열 관련 기능을 이해한다.
+    /// 다형성
+    /// 목표: 메소드 오버라이딩을 통해 다형성을 구현하는 방법을 학습한다.
     /// 
-    /// C#에서 문자열은 System.String 클래스를 사용하여 다룹니다. 
-    /// 이 클래스는 문자 데이터를 저장하고 관리하는 데 사용되며, 
-    /// 다양한 속성과 메서드를 제공하여 문자열을 조작할 수 있게 합니다. 
-    /// 문자열은 변경 불가능(immutable)하므로, 
-    /// 문자열을 조작하는 메서드들은 원본 문자열을 변경하는 대신 새로운 문자열 인스턴스를 반환합니다.
+    /// 다형성(Polymorphism)은 객체 지향 프로그래밍의 핵심 원칙 중 하나로, 
+    /// "많은 형태를 가질 수 있는 능력"을 의미합니다. 
+    /// 다형성은 같은 인터페이스나 메서드 호출이 서로 다른 객체 타입에 대해 서로 다른 동작을 할 수 있게 해줍니다. 
+    /// 이를 통해 코드의 유연성과 재사용성을 높일 수 있습니다.
     /// 
-    /// 문자열 기본
-    /// 문자열 초기화: 문자열 변수는 큰따옴표("")를 사용하여 초기화할 수 있습니다.
+    /// C#에서 다형성은 주로 메서드 오버라이딩(Method Overriding)을 통해 구현됩니다. 
+    /// 메서드 오버라이딩은 상속 관계에 있는 클래스에서 부모 클래스에 정의된 메서드를 자식 클래스에서 재정의하는 것을 말합니다.
+    /// 
+    /// 메서드 오버라이딩(Method Overriding)
+    /// virtual 메서드: 
+    /// 부모 클래스에서 메서드를 정의할 때 virtual 키워드를 사용하면, 
+    /// 이 메서드는 자식 클래스에서 오버라이드될 수 있습니다. 
+    /// virtual 메서드는 기본적인 동작을 제공하며, 
+    /// 필요에 따라 자식 클래스에서 변경할 수 있습니다.
+    /// 
+    /// override 메서드: 
+    /// 자식 클래스에서 부모 클래스의 virtual 메서드를 재정의할 때 override 키워드를 사용합니다. 
+    /// 이를 통해 메서드의 동작을 자식 클래스에 맞게 변경할 수 있습니다.
+    /// 
+    /// 다형성의 장점:
+    /// 1, 코드의 유연성: 다형성을 사용하면 한 인터페이스로 다양한 객체의 메서드를 호출할 수 있어, 코드의 유연성이 증가합니다.
+    /// 2, 재사용성 및 확장성: 기존 코드를 수정하지 않고도 새로운 클래스를 추가하거나 기존 클래스를 확장할 수 있어, 
+    ///                         코드의 재사용성과 확장성이 높아집니다.                     
+    /// 3, 유지 보수성: 코드의 중복을 줄이고, 변경에 대한 영향을 최소화하여 유지 보수성을 향상시킵니다.
     /// </summary>
     public class Class10
     {
+/// <summary>
+        /// Animal 클래스: 모든 동물의 기본이 되는 슈퍼 클래스
+        /// </summary>
+        class Animal
+        {
+            public virtual void AnimalSound()
+            {
+                Console.WriteLine("The animal makes a sound");
+            }
+        }
+
+        /// <summary>
+        /// Pig 클래스: Animal 클래스를 상속받는 서브 클래스
+        /// </summary>
+        class Pig : Animal
+        {
+            public override void AnimalSound()
+            {
+                Console.WriteLine("The pig says: wee wee");
+            }
+        }
+
+        /// <summary>
+        /// Dog 클래스: Animal 클래스를 상속받는 서브 클래스
+        /// </summary>
+        class Dog : Animal
+        {
+            public override void AnimalSound()
+            {
+                Console.WriteLine("The dog says: bow wow");
+            }
+        }
+
+        /// <summary>
+        /// Run 메서드: 다형성을 활용한 메서드 오버라이딩의 예제를 실행
+        /// </summary>
         public void Run()
         {
-            // 문자열 초기화 및 문자열 보간
-            string name = "John";
-            Console.WriteLine($"Hello {name}!"); // "Hello John!"
+            Animal myAnimal = new Animal(); // Animal 인스턴스
+            Animal myPig = new Pig(); // Pig 인스턴스
+            Animal myDog = new Dog(); // Dog 인스턴스
 
-            // 문자열 길이
-            Console.WriteLine(name.Length); // 4
-
-            // 문자열 대소문자 변환
-            Console.WriteLine(name.ToUpper()); // "JOHN"
-            Console.WriteLine(name.ToLower()); // "john"
-
-            // 문자열 포함 여부
-            Console.WriteLine(name.Contains("oh")); // True
-
-            // 문자열 비교
-            Console.WriteLine(name.Equals("John")); // True
-            Console.WriteLine(name == "John"); // True
-
-            // 문자열 분할
-            string data = "apple,orange,banana";
-            string[] fruits = data.Split(',');
-            foreach (var fruit in fruits)
-            {
-                Console.WriteLine(fruit);
-            }
-            // apple
-            // orange
-            // banana
-
-            // 문자열 치환
-            string replacedString = name.Replace("John", "Jane");
-            Console.WriteLine(replacedString); // "Jane"
-
-            // 문자열 잘라내기
-            string substring = name.Substring(1, 2);
-            Console.WriteLine(substring); // "oh"
-
-            // 문자열 공백 처리
-            string greeting = "   Hello World!   ";
-            Console.WriteLine($"'{greeting.Trim()}'"); // "'Hello World!'"
-            Console.WriteLine($"'{greeting.TrimStart()}'"); // "'Hello World!   '"
-            Console.WriteLine($"'{greeting.TrimEnd()}'"); // "'   Hello World!'"
+            myAnimal.AnimalSound(); // 출력: The animal makes a sound
+            myPig.AnimalSound(); // 출력: The pig says: wee wee
+            myDog.AnimalSound(); // 출력: The dog says: bow wow
         }
     }
 }

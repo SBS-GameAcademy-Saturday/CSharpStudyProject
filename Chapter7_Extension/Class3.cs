@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter5_Extension
+namespace CSharp_ProgramingStudy.Chapter7_Extension
 {
     /// <summary>
     /// Property (프로퍼티)
@@ -44,9 +41,24 @@ namespace CSharp_ProgramingStudy.Chapter5_Extension
                 set { name = value; } // 쓰기 접근자
             }
         }
+
         class Person2
         {
-            public string Name { get; set; } // 자동 구현 프로퍼티
+            // 자동 구현 프로퍼티
+            public string Name { get; set; } 
+        }
+
+        public void Run()
+        {
+            // Person 클래스 사용 예
+            Person person1 = new Person();
+            person1.Name = "John"; // set 접근자를 통해 이름 설정
+            Console.WriteLine(person1.Name); // get 접근자를 통해 이름 읽기
+
+            // Person2 클래스 사용 예
+            Person2 person2 = new Person2();
+            person2.Name = "Alice"; // 자동 구현 프로퍼티를 통해 이름 설정 및 읽기
+            Console.WriteLine(person2.Name);
         }
     }
 }

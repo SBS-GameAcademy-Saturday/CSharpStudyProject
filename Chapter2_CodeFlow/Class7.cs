@@ -6,61 +6,40 @@ using System.Threading.Tasks;
 namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
 {
     /// <summary>
-    /// break, continue
+    /// for
+    /// 목표: 정해진 횟수 동안 반복 실행하는 반복문을 사용한다.
     /// 
-    /// 먼저, break 키워드에 대해 알아보겠습니다. 
-    /// break는 반복문을 즉시 종료하고 반복문 다음의 코드 실행을 계속하도록 합니다. 
-    /// 이 예제에서는 i가 5에 도달했을 때 break가 실행되어 for 반복문을 종료하고 있습니다. 
-    /// break는 반복문을 제어하는 데 유용하게 사용될 수 있으며, 
-    /// 특정 조건 하에서 더 이상 반복을 계속할 필요가 없을 때 사용됩니다.
+    /// for 반복문의 기본 구조는 다음과 같습니다:
+    /// 1, 초기화 단계: 반복문이 시작될 때 한 번 실행되며, 
+    /// 반복문의 제어 변수를 초기화합니다. 예제에서는 int i = 0;이 해당됩니다.
+    ///
+    /// 2, 조건식: 각 반복의 시작 전에 평가되며, 
+    /// 이 조건이 참(true)인 동안 반복문은 계속 실행됩니다. 예제에서는 i < 5;가 해당됩니다.
     /// 
-    /// 다음으로, continue 키워드는 현재 반복을 즉시 종료하고 
-    /// 반복문의 다음 반복으로 넘어갑니다. 
-    /// 이 예제에서는 i가 짝수일 경우, 즉 i % 2 == 0일 때 
-    /// continue가 실행되어 Console.WriteLine(i); 코드를 건너뛰고 다음 반복을 진행합니다. 
-    /// continue는 반복문 내에서 특정 조건을 만족하는 경우에 
-    /// 현재 반복에서 더 이상의 코드 실행을 원하지 않을 때 유용하게 사용됩니다.
+    /// 3, 반복 후 실행되는 식: 각 반복의 끝에 실행되며, 
+    /// 주로 제어 변수의 값을 변경합니다. 예제에서는 i++가 해당됩니다.
     /// 
-    /// break와 continue는 반복문 내에서 프로그램의 흐름을 유연하게 
-    /// 제어할 수 있게 해주는 강력한 도구입니다. 
-    /// 이를 통해 반복문의 실행을 보다 정밀하게 관리할 수 있으며, 
-    /// 코드의 가독성과 유지 보수성을 향상시킬 수 있습니다.
+    /// 4, 반복될 코드 블록: 중괄호 {} 안에 위치하며, 
+    /// 조건식이 참인 동안 반복해서 실행됩니다.
+    ///
+    /// for 반복문은 다음과 같은 상황에서 특히 유용합니다:
+    /// - 배열이나 컬렉션의 모든 요소를 순회할 때
+    /// - 정해진 횟수만큼 특정 작업을 반복할 때
+    /// - 숫자를 증가시키거나 감소시키면서 반복할 작업을 수행할 때
+    /// 
+    /// for 반복문의 사용은 프로그래밍에서 반복적인 작업을 효율적으로 
+    /// 처리하는 기본적인 방법 중 하나입니다. 
+    /// 여러분도 이 예제를 직접 실행해보고, 
+    /// 다양한 조건과 작업에 for 반복문을 활용해보세요.
     /// </summary>
     public class Class7
     {
         public void Run()
         {
-            // for 반복문에서 break와 continue 사용
-            Console.WriteLine("Using break and continue in for loop:");
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
-                if (i == 5) break; // i가 5일 때 반복문 종료
-                if (i % 2 == 0) continue; // i가 짝수일 경우 출력 건너뛰기
-                Console.WriteLine(i); // 홀수만 출력
+                Console.WriteLine($"i: {i}");
             }
-
-            // while 반복문에서 break와 continue 사용
-            Console.WriteLine("\nUsing break and continue in while loop:");
-            int count = 0;
-            while (count < 10)
-            {
-                if (count == 7) break; // count가 7일 때 반복문 종료
-                count++;
-                if (count % 2 == 0) continue; // count가 짝수일 경우 건너뛰기
-                Console.WriteLine(count); // 홀수만 출력
-            }
-
-            // do-while 반복문에서 break와 continue 사용
-            Console.WriteLine("\nUsing break and continue in do-while loop:");
-            int number = 0;
-            do
-            {
-                if (number == 6) break; // number가 6일 때 반복문 종료
-                number++;
-                if (number % 2 == 0) continue; // number가 짝수일 경우 건너뛰기
-                Console.WriteLine(number); // 홀수만 출력
-            }
-            while (number < 10);
         }
     }
 }

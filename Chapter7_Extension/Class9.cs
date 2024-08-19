@@ -1,46 +1,60 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
-namespace CSharp_ProgramingStudy.Chapter5_Extension
+namespace CSharp_ProgramingStudy.Chapter7_Extension
 {
     /// <summary>
-    /// Nullable (널러블)
-    /// 널러블 타입은 C#에서 값 타입(Value Type) 변수가 null 값을 가질 수 있게 해주는 기능입니다.
-    /// 기본적으로 값 타입은 null을 할당할 수 없습니다. 예를 들어, int, double, bool과 같은 타입은
-    /// 기본적으로 null을 허용하지 않습니다. 널러블 타입은 이러한 제약을 해결하고, 값 타입 변수가
-    /// null을 가질 수 있도록 해줍니다.
+    /// Reflection (리플렉션)
+    /// 리플렉션은 실행 시간에 프로그램의 메타 데이터를 검사하고, 조작할 수 있는 강력한 기능을 제공합니다.
+    /// C#에서 리플렉션은 System.Reflection 네임스페이스를 통해 사용할 수 있으며,
+    /// 클래스의 타입 정보를 얻거나, 인스턴스를 동적으로 생성하고, 메서드를 호출하거나,
+    /// 프로퍼티와 필드에 접근할 수 있게 해줍니다.
     ///
-    /// 널러블 타입의 선언:
-    /// 널러블 타입은 해당 타입 뒤에 ?를 붙여 선언합니다. 예를 들어, int?는 널러블 정수 타입을 의미합니다.
+    /// 주요 사용 사례:
+    /// - 타입 정보 얻기: 실행 시간에 객체의 타입을 얻거나, 해당 타입이 가지고 있는 메서드, 프로퍼티, 필드, 이벤트 등의 정보를 조회할 수 있습니다.
+    /// - 동적 인스턴스 생성: Activator.CreateInstance 메서드를 사용하여 실행 시간에 동적으로 객체 인스턴스를 생성할 수 있습니다.
+    /// - 메서드 실행: 리플렉션을 사용하여 특정 객체의 메서드를 동적으로 호출할 수 있습니다.
+    /// - 어트리뷰트 접근: 클래스, 메서드, 프로퍼티 등에 적용된 어트리뷰트 정보를 읽어올 수 있습니다.
+    /// - 프로퍼티와 필드 조작: 실행 시간에 객체의 프로퍼티나 필드에 값을 설정하거나, 값을 가져올 수 있습니다.
     ///
-    /// 널러블 타입의 주요 속성 및 메서드:
-    /// - HasValue: 변수에 값이 할당되어 있는지 여부를 나타내는 bool 값입니다. 값이 있으면 true, null이면 false를 반환합니다.
-    /// - Value: 변수에 저장된 값을 반환합니다. HasValue가 false일 때 Value를 접근하면 InvalidOperationException 예외가 발생합니다.
-    ///
-    /// 널러블 타입의 사용 이유:
-    /// - 데이터베이스와의 상호작용: 데이터베이스에서는 종종 값이 '없음' 또는 '알 수 없음'을 나타내기 위해 null을 사용합니다.
-    ///   널러블 타입을 사용하면 데이터베이스의 null 값을 자연스럽게 처리할 수 있습니다.
-    /// - 옵셔널 데이터 처리: 함수나 메서드의 결과가 '없음'을 의미할 수 있을 때 널러블 타입을 사용하여 이를 표현할 수 있습니다.
+    /// 리플렉션의 장단점:
+    /// - 장점: 동적 프로그래밍이 가능하며, 프로그램의 유연성과 확장성을 높일 수 있습니다.
+    /// - 단점: 성능 오버헤드가 발생할 수 있으며, 타입 안전성이 보장되지 않을 수 있습니다. 내부 구현을 쉽게 노출할 수 있어 보안상의 문제가 될 수 있습니다.
+    /// 리플렉션은 프로그램의 동적인 조작이 필요할 때 매우 유용하지만, 성능과 보안 측면에서 신중하게 사용해야 합니다.
     /// </summary>
-    public class Class9
+    public class Class8
     {
+        class MyClass
+        {
+            public void Method1() { Console.WriteLine("Method1 실행"); }
+            public void Method2() { Console.WriteLine("Method2 실행"); }
+        }
         public void Run()
         {
-            int? nullableInt = null;
-            double? nullableDouble = null;
-            bool? nullableBool = null;
+            // 1. MyClass 타입 정보를 가져오기
+            Type type = typeof(MyClass);
 
-            int? num = null; // 널러블 타입의 선언 및 초기화
-            if (num.HasValue)
+            // 2. MyClass 타입의 모든 메서드 정보를 출력
+            foreach (MethodInfo method in type.GetMethods())
             {
-                Console.WriteLine(num.Value); // 값이 존재할 경우, 값을 출력
+                Console.WriteLine("Method name: " + method.Name);
             }
-            else
-            {
-                Console.WriteLine("num is null"); // 값이 null인 경우, 메시지 출력
-            }
+
+            // 3. MyClass의 인스턴스를 동적으로 생성
+            MyClass myClassInstance = (MyClass)Activator.CreateInstance(type);
+
+            // 4. Method1 메서드 정보를 가져와서 호출
+            MethodInfo methodInfo = type.GetMethod("Method1");
+            methodInfo.Invoke(myClassInstance, null);
+
+            // 출력 예:
+            // Method name: Method1
+            // Method name: Method2
+            // Method name: GetType
+            // Method name: ToString
+            // Method name: Equals
+            // Method name: GetHashCode
+            // Method1 실행
         }
     }
 }

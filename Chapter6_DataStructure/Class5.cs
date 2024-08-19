@@ -1,68 +1,66 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter4_DataStructure
+namespace CSharp_ProgramingStudy.Chapter6_DataStructure
 {
     /// <summary>
-    /// Dictionary
-    /// 목표: Dictionary를 사용하여 키-값 쌍을 저장하는 방법을 이해한다.
+    /// Stack (스택)
+    /// 목표: 스택을 사용하여 후입선출(LIFO) 방식으로 데이터를 처리하는 방법을 이해한다.
     /// 
-    /// Dictionary<TKey, TValue>는 C#의 System.Collections.Generic 네임스페이스에 있는 제네릭 컬렉션의 일종으로, 
-    /// 키와 값의 쌍으로 데이터를 저장합니다. 각 키는 컬렉션 내에서 유일해야 하며, 
-    /// 이를 통해 효율적인 데이터 검색, 추가, 수정, 삭제 작업을 수행할 수 있습니다.
+    /// 스택(Stack) 이란?
+    /// 스택은 후입선출(LIFO, Last-In-First-Out) 방식으로 데이터를 처리하는 자료구조입니다.
+    /// 이는 나중에 들어온 데이터가 먼저 처리되는 구조를 의미합니다.
+    /// 스택은 주로 재귀 알고리즘, 함수 호출 관리, 문자열 역순 처리와 같은 작업에서 사용됩니다.
     /// 
-    /// Dictionary의 주요 특징:
-    /// 1, 키-값 쌍: 데이터는 키(Key)와 값(Value)의 쌍으로 저장됩니다. 키를 통해 빠르게 값을 검색할 수 있습니다.
-    /// 2, 제네릭: Dictionary<TKey, TValue>는 제네릭을 사용하여 다양한 타입의 키와 값을 저장할 수 있습니다.
-    /// 3, 고유한 키: 키는 컬렉션 내에서 고유해야 하며, 중복된 키를 추가하려고 하면 예외가 발생합니다.
-    /// 4, 동적 크기 조정: 요소를 추가하거나 제거할 때 컬렉션의 크기가 동적으로 조정됩니다.
+    /// 스택의 주요 특징:
+    /// 1. **후입선출(LIFO)**: 스택에 나중에 들어간 데이터가 먼저 나옵니다.
+    ///    이는 큐(Queue)의 선입선출(FIFO)과는 반대되는 개념입니다.
+    /// 
+    /// 2. **동적 크기 조정**: `Stack<T>`는 동적 크기 조정을 지원하여,
+    ///    데이터가 추가되거나 제거될 때 크기가 자동으로 조정됩니다.
+    /// 
+    /// 3. **단일 접근점**: 스택의 요소는 한쪽 끝(맨 위)에서만 추가하거나 제거할 수 있습니다.
     /// 
     /// 주요 메서드 및 속성:
-    /// Add(TKey key, TValue value): 새 키-값 쌍을 딕셔너리에 추가합니다.
-    /// Remove(TKey key): 지정된 키를 가진 요소를 제거합니다.
-    /// ContainsKey(TKey key): 딕셔너리에 특정 키가 있는지 확인합니다.
-    /// TryGetValue(TKey key, out TValue value): 특정 키에 해당하는 값을 가져오려고 시도하며, 성공 여부를 반환합니다.
-    /// Count: 딕셔너리에 있는 키-값 쌍의 수를 반환합니다.
+    /// - `Push(T item)`: 스택의 맨 위에 새로운 요소를 추가합니다.
+    /// - `Pop()`: 스택의 맨 위에서 요소를 제거하고 반환합니다.
+    /// - `Peek()`: 스택의 맨 위에 있는 요소를 제거하지 않고 반환합니다.
+    /// - `Count`: 스택에 있는 요소의 수를 반환합니다.
+    /// - `Clear()`: 스택의 모든 요소를 제거합니다.
     /// </summary>
     public class Class5
     {
         public void Run()
         {
-            // 문자열 키와 문자열 값을 가지는 Dictionary 생성
-            Dictionary<string, string> capitals = new Dictionary<string, string>();
+            // 정수를 저장하는 스택 생성
+            Stack<int> stack = new Stack<int>();
 
-            // 키-값 쌍 추가
-            capitals.Add("South Korea", "Seoul");
-            capitals.Add("United States", "Washington D.C.");
-            capitals.Add("United Kingdom", "London");
+            // 요소 추가
+            stack.Push(1); // 스택에 1 추가
+            stack.Push(2); // 스택에 2 추가
+            stack.Push(3); // 스택에 3 추가
 
-            // 키를 통한 값 접근
-            Console.WriteLine($"The capital of South Korea is {capitals["South Korea"]}"); // 출력: Seoul
+            // 스택의 맨 위 요소를 제거하고 반환
+            int topItem = stack.Pop();
+            Console.WriteLine($"Popped item: {topItem}"); // 출력: Popped item: 3
 
-            // 딕셔너리 순회
-            foreach (var kvp in capitals)
+            // 스택의 현재 맨 위 요소 확인 (제거하지 않음)
+            int nextItem = stack.Peek();
+            Console.WriteLine($"Next item: {nextItem}"); // 출력: Next item: 2
+
+            // 스택의 모든 요소를 순회
+            Console.WriteLine("Remaining items in stack:");
+            foreach (int item in stack)
             {
-                Console.WriteLine($"Country: {kvp.Key}, Capital: {kvp.Value}");
+                Console.WriteLine(item); // 출력: 2, 1
             }
 
-            // 키 존재 여부 확인
-            if (capitals.ContainsKey("France"))
-            {
-                Console.WriteLine($"The capital of France is {capitals["France"]}");
-            }
-            else
-            {
-                Console.WriteLine("France is not in the dictionary.");
-            }
+            // 스택의 요소 수 출력
+            Console.WriteLine($"Stack count: {stack.Count}"); // 출력: 2
 
-            // 키에 해당하는 값 가져오기
-            string capital;
-            if (capitals.TryGetValue("United Kingdom", out capital))
-            {
-                Console.WriteLine($"The capital of the United Kingdom is {capital}");
-            }
+            // 스택 비우기
+            stack.Clear();
+            Console.WriteLine($"Stack count after clearing: {stack.Count}"); // 출력: 0
         }
     }
 }

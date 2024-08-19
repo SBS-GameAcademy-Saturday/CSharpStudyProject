@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter4_DataStructure
+namespace CSharp_ProgramingStudy.Chapter6_DataStructure
 {
     /// <summary>
     /// 배열
@@ -41,12 +41,6 @@ namespace CSharp_ProgramingStudy.Chapter4_DataStructure
             for (int i = 0; i < cars.Length; i++)
             {
                 Console.WriteLine(cars[i]);
-            }
-
-            // foreach를 사용한 배열 요소 순회
-            foreach (string car in cars)
-            {
-                Console.WriteLine(car);
             }
         }
     }

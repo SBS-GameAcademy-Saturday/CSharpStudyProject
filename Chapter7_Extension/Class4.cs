@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter5_Extension
+namespace CSharp_ProgramingStudy.Chapter7_Extension
 {
     /// <summary>
     /// Delegate (대리자)
@@ -28,18 +28,22 @@ namespace CSharp_ProgramingStudy.Chapter5_Extension
     /// </summary>
     public class Class4
     {
+        // 대리자 선언: void 반환 타입과 string 매개변수를 받는 메서드를 참조
         public delegate void ShowMessage(string message);
 
-        public class TestDelegate
+        // 출력할 메서드 정의
+        static void PrintToConsole(string message)
         {
-            public void Run()
-            {
-                ShowMessage sm = delegate (string msg)
-                {
-                    Console.WriteLine(msg);
-                };
-                sm("Hello World!");
-            }
+            Console.WriteLine(message);
+        }
+
+        static void Run()
+        {
+            // 대리자를 통해 메서드를 참조
+            ShowMessage showMessage = PrintToConsole;
+
+            // 대리자를 사용하여 메서드 호출
+            showMessage("Hello, this is a simple delegate example!"); // 출력: Hello, this is a simple delegate example!
         }
     }
 }

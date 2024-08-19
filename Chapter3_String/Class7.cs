@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter3_String
+namespace CSharp_ProgramingStudy.Chapter3_String
 {
   /// <summary>
   /// Escape Sequences (이스케이프 시퀀스) 학습 자료

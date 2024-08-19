@@ -1,6 +1,6 @@
 using System;
 
-namespace Chapter1_Data
+namespace CSharp_ProgramingStudy.Chapter1_Data
 {
     /// <summary>
     /// 문자열 데이터 타입의 사용과 문자열 관련 기본 연산을 이해한다.

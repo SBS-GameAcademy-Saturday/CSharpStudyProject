@@ -1,69 +1,66 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CSharp_ProgramingStudy.Chapter5_Extension
+namespace CSharp_ProgramingStudy.Chapter7_Extension
 {
-    /// <summary>
-    /// Interface (인터페이스)
-    /// 목표: 인터페이스를 사용하여 클래스에 특정 메소드를 구현하도록 강제하는 방법을 학습한다.
-    /// 
-    /// 인터페이스(Interface)는 C#에서 특정 클래스나 구조체가 구현해야 하는 
-    /// 메서드의 시그니처(이름, 반환 타입, 매개 변수)를 정의하는 계약 같은 것입니다. 
-    /// 인터페이스를 사용하면 다양한 클래스들이 동일한 인터페이스를 구현함으로써 
-    /// 동일한 동작을 보장할 수 있으며, 이는 다형성(polymorphism)을 지원하는 중요한 메커니즘입니다.
-    /// 
-    /// 인터페이스의 주요 특징:
-    /// 1, 메서드 시그니처만 정의: 
-    /// 인터페이스는 메서드의 구현을 포함하지 않고, 
-    /// 메서드 시그니처(이름, 파라미터 타입 및 순서, 반환 타입)만을 정의합니다.
-    /// 
-    /// 2, 구현 강제: 
-    /// 클래스나 구조체가 인터페이스를 구현하기로 선언하면, 
-    /// 해당 인터페이스에 정의된 모든 메서드를 구현해야 합니다. 
-    /// 이를 통해 일관된 동작을 강제할 수 있습니다.
-    /// 
-    /// 3, 다중 상속 지원: 
-    /// C#에서 클래스는 단일 상속만 지원하지만, 
-    /// 인터페이스를 통해 다중 상속과 유사한 효과를 낼 수 있습니다. 
-    /// 클래스는 여러 인터페이스를 구현할 수 있습니다.
-    /// 
-    /// 4, 타입 안정성: 
-    /// 인터페이스는 타입 체크 시 사용될 수 있어, 
-    /// 인터페이스 타입으로 선언된 객체는 해당 인터페이스를 구현하는 
-    /// 모든 클래스의 인스턴스를 참조할 수 있습니다.
-    /// 
-    /// 인터페이스의 활용:
-    /// - 인터페이스는 다음과 같은 상황에서 유용하게 사용됩니다:
-    /// - 여러 클래스가 동일한 메서드를 구현하도록 강제하고 싶을 때
-    /// - 서로 다른 클래스의 객체를 동일한 방식으로 처리해야 할 때(다형성)
-    /// - 클래스의 특정 기능만을 외부에 노출시키고 싶을 때
-    ///
-    /// </summary>
-    public class Class2
+  /// <summary>
+  /// foreach
+  /// 목표: 컬렉션 또는 배열의 모든 요소를 순회하면서 작업을 수행한다.
+  /// 
+  /// foreach 반복문의 기본 구조는 다음과 같습니다:
+  /// 
+  /// 1. foreach 키워드 다음에 소괄호 () 안에 '변수 in 컬렉션' 형식으로 작성됩니다.
+  ///    예제에서는 `foreach (string fruit in fruits)`가 해당됩니다.
+  ///
+  /// 2. 중괄호 {} 안에는 컬렉션의 각 요소에 대해 반복적으로 실행될 코드를 작성합니다.
+  ///    이 블록은 컬렉션의 모든 요소가 한 번씩 처리될 때까지 반복 실행됩니다.
+  /// 
+  /// 3. foreach 문은 주로 배열이나 리스트 같은 컬렉션의 모든 요소를 
+  ///    하나씩 처리할 때 사용됩니다. 
+  ///    반복문 내에서 컬렉션의 요소를 수정할 수 없으므로, 
+  ///    읽기 전용 작업에 적합합니다.
+  ///
+  /// foreach 반복문은 다음과 같은 상황에서 특히 유용합니다:
+  /// - 배열이나 리스트의 모든 요소를 순회할 때
+  /// - 컬렉션의 요소를 읽기 전용으로 처리할 때
+  /// 
+  /// foreach 반복문을 사용하면 코드가 간결하고 명확해지며,
+  /// 특정 컬렉션의 요소를 처리하는 작업을 매우 효율적으로 수행할 수 있습니다.
+  /// 이 예제를 직접 실행해보고, 다양한 컬렉션에 foreach 문을 적용해 보세요.
+  /// </summary>
+  public class Class2
+  {
+    public void Run()
     {
-        interface IAnimal
-        {
-            void animalSound(); // 인터페이스 메서드
-        }
+      // 배열 순회 예제
+      string[] fruits = { "Apple", "Banana", "Cherry" };
+      Console.WriteLine("Iterating over an array:");
+      foreach (string fruit in fruits)
+      {
+        Console.WriteLine($"Fruit: {fruit}");
+      }
 
-        class Pig : IAnimal
-        {
-            public void animalSound()
-            {
-                // IAnimal 인터페이스의 animalSound 메서드 구현
-                Console.WriteLine("The pig says: wee wee");
-            }
-        }
+      // 리스트 순회 예제
+      List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+      Console.WriteLine("\nIterating over a list:");
+      foreach (int number in numbers)
+      {
+        Console.WriteLine($"Number: {number}");
+      }
 
-        class Dog : Pig, IAnimal
-        {
-            public void animalSound()
+      // 딕셔너리 순회 예제
+      Dictionary<string, int> nameAges = new Dictionary<string, int>
             {
-                // IAnimal 인터페이스의 animalSound 메서드 구현
-                Console.WriteLine("The dog says: bow wow");
-            }
-        }
+                { "Alice", 30 },
+                { "Bob", 25 },
+                { "Charlie", 35 }
+            };
+      Console.WriteLine("\nIterating over a dictionary:");
+      foreach (KeyValuePair<string, int> entry in nameAges)
+      {
+        Console.WriteLine($"{entry.Key} is {entry.Value} years old.");
+      }
     }
+  }
 }
+
