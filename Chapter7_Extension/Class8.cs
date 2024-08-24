@@ -22,7 +22,7 @@ namespace CSharp_ProgramingStudy.Chapter7_Extension
     ///   오류의 원인을 진단하는 데 도움이 됩니다.
     /// - 프로그램 흐름 제어: 예외 처리를 사용하면 오류 발생 시 프로그램의 실행 흐름을 명시적으로 제어할 수 있습니다.
     /// </summary>
-    public class Class7
+    public class Class8
     {
         public void Run()
         {

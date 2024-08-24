@@ -24,7 +24,7 @@ namespace CSharp_ProgramingStudy.Chapter7_Extension
     ///   널러블 타입을 사용하면 데이터베이스의 null 값을 자연스럽게 처리할 수 있습니다.
     /// - 옵셔널 데이터 처리: 함수나 메서드의 결과가 '없음'을 의미할 수 있을 때 널러블 타입을 사용하여 이를 표현할 수 있습니다.
     /// </summary>
-    public class Class9
+    public class Class10
     {
         public void Run()
         {

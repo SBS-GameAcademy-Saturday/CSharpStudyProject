@@ -69,6 +69,9 @@ namespace CSharp_ProgramingStudy.Chapter6_DataStructure
             HashSet<int> otherNumbers = new HashSet<int> { 3, 4, 5 };
 
             // 합집합
+            // numbers = {1,3}
+            // otherNumbers = { 3, 4, 5 };
+            // 합집합 => {1,3,4,5}
             numbers.UnionWith(otherNumbers);
             Console.WriteLine("UnionWith result:");
             foreach (int number in numbers)
@@ -77,6 +80,9 @@ namespace CSharp_ProgramingStudy.Chapter6_DataStructure
             }
 
             // 교집합
+            // numbers = {1,3,4,5}
+            // otherNumbers = { 3, 4, 5 };
+            // 교집합 => {3,4,5}
             numbers.IntersectWith(otherNumbers);
             Console.WriteLine("IntersectWith result:");
             foreach (int number in numbers)
@@ -85,6 +91,9 @@ namespace CSharp_ProgramingStudy.Chapter6_DataStructure
             }
 
             // 차집합
+            // numbers = {3,4,5}
+            // otherNumbers = { 3, 4, 5 };
+            // 교집합 => {}
             numbers.ExceptWith(otherNumbers);
             Console.WriteLine("ExceptWith result:");
             foreach (int number in numbers)

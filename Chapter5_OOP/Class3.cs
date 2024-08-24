@@ -33,7 +33,7 @@ namespace CSharp_ProgramingStudy.Chapter5_OOP
     /// 효율성과 안정성을 보장하는 데 필수적입니다.
     /// 
     /// </summary>
-    public class Class2
+    public class Class3
     {
         // 구조체 정의
         struct Point

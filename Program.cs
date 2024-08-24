@@ -7,6 +7,15 @@ namespace ProgramClass
 {
     class Program
     {
+        public class ButtonEventArgs : EventArgs
+        {
+            public string Message;
+
+            public ButtonEventArgs(string message)
+            {
+                Message = message;
+            }
+        }
         // 간단한 이벤트 예제: 버튼 클릭
         public class Button
         {
@@ -19,16 +28,18 @@ namespace ProgramClass
                 Console.WriteLine("Button was clicked!");
 
                 // 이벤트 발생
-                OnButtonClicked(EventArgs.Empty);
+                OnButtonClicked(new ButtonEventArgs("Hello World"));
             }
 
             // 이벤트 발생 메서드
-            protected virtual void OnButtonClicked(EventArgs e)
+            protected virtual void OnButtonClicked(ButtonEventArgs e)
             {
                 // 이벤트가 구독된 경우에만 실행
                 if (ButtonClicked != null)
                 {
                     ButtonClicked(this, e);
+
+                    System.Console.WriteLine(e.Message);
                 }
             }
         }
@@ -42,6 +53,7 @@ namespace ProgramClass
             public Subscriber(string name, Button button)
             {
                 this.name = name;
+                button.ButtonClicked -= HandleButtonClick;
                 button.ButtonClicked += HandleButtonClick;
             }
 
@@ -51,7 +63,6 @@ namespace ProgramClass
                 Console.WriteLine($"{name} received the ButtonClicked event.");
             }
         }
-
 
         public static void Run()
         {
@@ -65,6 +76,7 @@ namespace ProgramClass
             // 버튼 클릭
             button.Click();
         }
+
         static void Main(string[] args)
         {
             Run();

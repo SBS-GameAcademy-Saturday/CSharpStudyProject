@@ -22,7 +22,7 @@ namespace CSharp_ProgramingStudy.Chapter7_Extension
     /// - 단점: 성능 오버헤드가 발생할 수 있으며, 타입 안전성이 보장되지 않을 수 있습니다. 내부 구현을 쉽게 노출할 수 있어 보안상의 문제가 될 수 있습니다.
     /// 리플렉션은 프로그램의 동적인 조작이 필요할 때 매우 유용하지만, 성능과 보안 측면에서 신중하게 사용해야 합니다.
     /// </summary>
-    public class Class8
+    public class Class9
     {
         class MyClass
         {

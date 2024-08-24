@@ -22,7 +22,7 @@ namespace CSharp_ProgramingStudy.Chapter7_Extension
     /// - 람다식은 LINQ 쿼리, 이벤트 핸들러의 등록, 타이머의 콜백 함수 등 다양한 곳에서 활용됩니다.
     /// - 특히, LINQ 쿼리에서 람다식을 사용하면 컬렉션에 저장된 데이터를 처리하는 복잡한 쿼리를 간결하고 읽기 쉬운 코드로 작성할 수 있습니다.
     /// </summary>
-    public class Class6
+    public class Class7
     {
         public void Run()
         {
