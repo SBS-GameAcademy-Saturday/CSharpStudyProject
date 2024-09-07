@@ -60,6 +60,17 @@ namespace CSharp_ProgramingStudy.Chapter1_Data
             // 논리 연산자의 우선순위
             bool logicResult = true || false && false; // &&가 ||보다 우선순위가 높습니다.
             Console.WriteLine(logicResult); // 출력: True
+
+            int a = 10;
+            a += 10;  // => a = a + 10;
+            Console.WriteLine(a); // 20;
+            a -= 5;  // => a = a - 5;
+            Console.WriteLine(a);//15;
+            a *= 2;  // => a = a * 2;
+            Console.WriteLine(a);// 30;
+            a /= 5; // => a = a / 5;
+            Console.WriteLine(a);//6 
+            
             //결론
             // 23
             // 35

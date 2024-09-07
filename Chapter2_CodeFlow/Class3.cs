@@ -35,25 +35,73 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
     /// </summary>
     public class Class3
     {
-        public void Run()
-        {
-            string playerChoice = "가위"; // 사용자 입력을 가정
-            string computerChoice = "바위"; // 컴퓨터 선택을 가정
 
-            if (playerChoice == computerChoice)
+
+        // 가위 바위 보 게임 만들기 
+        // (가위, 바위 , 보)중에서 특정 값을 입력하면 
+        // 컴퓨터가 낸 값이랑 비교해서 결과를 출력한다.
+        // => 1, 플레이어가 (가위, 바위 , 보)중에서 하나의 값을 입력하게 만들어야 한다.
+        // => 2, 컴퓨터가 랜덤으로 (가위, 바위 , 보)주에서 하나의 값을 가지게 한다.
+        // => 3, 플레이어가 입력한 값이랑 컴퓨터가 입력한 값이랑 결과를 비교한다.
+        // => 4, 결과를 출력한다.
+        static void Main(string[] args)
+        {
+            Console.WriteLine("가위 바위 보 게임을 시작합니다.");
+            Console.WriteLine("가위, 바위 , 보 중에서 하나를 선택하여 값을 입력해주세요");
+            // 1, 플레이어가 (가위, 바위 , 보)중에서 하나의 값을 입력하게 만들어야 한다.
+            string inputValue = Console.ReadLine();
+            if(inputValue == "가위" || inputValue == "바위" || inputValue == "보")
             {
-                Console.WriteLine("Draw!");
-            }
-            else if ((playerChoice == "가위" && computerChoice == "보") ||
-                       (playerChoice == "바위" && computerChoice == "가위") ||
-                       (playerChoice == "보" && computerChoice == "바위"))
-            {
-                Console.WriteLine("Player wins!");
+                Console.WriteLine("입력한 값은 : " + inputValue);
+                // 2, 컴퓨터가 랜덤으로 (가위, 바위 , 보)주에서 하나의 값을 가지게 한다.
+                Random random = new Random();
+                int randomInt = random.Next(0,3);
+                string computerResult = "";
+                switch (randomInt)
+                {
+                    case 0:
+                        computerResult = "가위";
+                        break;
+                    case 1:
+                        computerResult = "바위";
+                        break;
+                    case 2:
+                        computerResult = "보";
+                        break;
+                    default :
+                        computerResult = "가위";
+                        break;
+                }
+                Console.WriteLine("컴퓨터가 반환한 값은 " + computerResult);
+                string result = "";
+                if (inputValue == computerResult)
+                {
+                    result = "Draw";
+                }
+                else if (inputValue == "가위" && computerResult == "보")
+                {
+                    result = "Player Win !";
+                }
+                else if (inputValue == "바위" && computerResult == "가위")
+                {
+                    result = "Player Win !";
+                }
+                else if (inputValue == "보" && computerResult == "바위")
+                {
+                    result = "Player Win !";
+                }
+                else
+                {
+                    result = "Computer Win !";
+                }
+                Console.WriteLine("결과는 : " + result);
             }
             else
             {
-                Console.WriteLine("Computer wins!");
+                Console.WriteLine("입력한 값은 : " + inputValue);
+                Console.WriteLine("잘못된 값을 입력해서 프로그램을 종료합니다.");
             }
+        
         }
     }
 }
