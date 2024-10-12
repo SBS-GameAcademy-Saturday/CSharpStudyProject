@@ -17,8 +17,10 @@ namespace CSharp_ProgramingStudy.Chapter3_String
       // 1. Equals: 문자열이 같은지 비교합니다.
       string text1 = "Hello";
       string text2 = "hello";
-      bool areEqual = text1.Equals(text2, StringComparison.OrdinalIgnoreCase);
-      Console.WriteLine($"Equals 메서드로 비교 (대소문자 무시): {areEqual}"); // 출력: True
+      bool areEqual = text1.Equals(text2);
+      bool areEqual2 = text1.Equals(text2, StringComparison.OrdinalIgnoreCase);// 대소문자 무시
+      Console.WriteLine($"Equals 메서드로 비교: {areEqual}");// 출력 : False
+      Console.WriteLine($"Equals 메서드로 비교 (대소문자 무시): {areEqual2}"); // 출력: True
 
       // 2. Compare: 두 문자열을 비교하여 정렬 순서를 반환합니다.
       string text3 = "apple";
