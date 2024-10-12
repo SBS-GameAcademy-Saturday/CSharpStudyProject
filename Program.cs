@@ -79,7 +79,17 @@ namespace ProgramClass
 
         static void Main(string[] args)
         {
-            Run();
+            int number1 = 5;
+            int number2 = 5;
+            // 전위 증감 연산자: 먼저 값을 증가시킨 후 사용
+            // 후위 증감 연산자: 값을 먼저 사용하고 그 후에 증가시킴
+            Console.WriteLine($"증가 연산 [전위 : {++number1}] ,[후위 : {number2++}]");  // 출력: 증가 연산 [전위 : 6] ,[후위 : 5]
+            Console.WriteLine($"증가 연산 후 값: {number1} , {number2}");         // 출력: 증가 연산 후 값: 6 , 6
+
+            // 전위 감소 연산자: 먼저 값을 감소시킨 후 사용
+            // 후위 감소 연산자: 값을 먼저 사용하고 그 후에 감소시킴
+            Console.WriteLine($"감소 연산 [전위 : {--number1}] ,[후위 : {number2--}]");  // 출력: 감소 연산 [전위 : 5] ,[후위 : 6]
+            Console.WriteLine($"감소 연산 후 값: {number1} , {number2}");  // 출력: 감소 연산 후 값: 5 , 5
         }
     }
 }

@@ -44,7 +44,7 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
         // => 2, 컴퓨터가 랜덤으로 (가위, 바위 , 보)주에서 하나의 값을 가지게 한다.
         // => 3, 플레이어가 입력한 값이랑 컴퓨터가 입력한 값이랑 결과를 비교한다.
         // => 4, 결과를 출력한다.
-        static void Main(string[] args)
+        void Run()
         {
             Console.WriteLine("가위 바위 보 게임을 시작합니다.");
             Console.WriteLine("가위, 바위 , 보 중에서 하나를 선택하여 값을 입력해주세요");
