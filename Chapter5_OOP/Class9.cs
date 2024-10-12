@@ -25,6 +25,15 @@ namespace CSharp_ProgramingStudy.Chapter5_OOP
     /// 이 변환은 명시적으로 형 변환 연산자를 사용해야 하며, 
     /// 변환하는 타입이 실제 객체의 타입과 호환되지 않으면 런타임에 오류가 발생할 수 있습니다. 
     /// 따라서, 다운캐스팅은 타입 호환성을 확인한 후에 수행해야 합니다.
+    /// 
+    /// is 연산자
+    /// is 연산자는 객체가 특정 타입과 호환되는지 확인하는 데 사용됩니다. 
+    /// 객체가 지정된 타입으로 변환이 가능한지 여부를 반환하며, 변환이 가능하면 true, 그렇지 않으면 false를 반환합니다. 
+    /// 이를 통해 다운캐스팅이 가능한지 사전에 확인하여 안전하게 형 변환을 수행할 수 있습니다.
+    /// as 연산자
+    /// as 연산자는 형 변환을 시도하되, 변환이 불가능할 경우 예외를 발생시키는 대신 null을 반환합니다. 
+    /// 이를 통해 형 변환에 실패할 때 예외 처리 없이 null 체크를 통해 안전한 처리를 할 수 있습니다. 
+    /// 단, as는 참조 타입에만 사용이 가능하며, 값 타입에는 사용할 수 없습니다.
     /// </summary>
     public class Class9
     {
@@ -55,6 +64,39 @@ namespace CSharp_ProgramingStudy.Chapter5_OOP
             Animal animal2 = new Dog();
             Dog dog2 = (Dog)animal2; // 다운캐스팅, 명시적 형 변환 필요
             dog2.Bark(); // Dog 클래스의 메서드 호출 가능
+
+                        // 다운캐스팅 예시 - is 연산자 사용
+            if (animal2 is Dog dog3)
+            {
+                dog3.Bark(); // 다운캐스팅 성공 시에만 호출 가능
+            }
+            else
+            {
+                Console.WriteLine("animal2 is not a Dog.");
+            }
+
+            // 다운캐스팅 예시 - as 연산자 사용
+            Dog dog4 = animal2 as Dog;
+            if (dog4 != null)
+            {
+                dog4.Bark(); // 다운캐스팅 성공 시에만 호출 가능
+            }
+            else
+            {
+                Console.WriteLine("animal2 cannot be cast to Dog.");
+            }
+
+            // 다운캐스팅 예시 - 잘못된 형 변환
+            Animal animal3 = new Animal();
+            Dog dog5 = animal3 as Dog;
+            if (dog5 != null)
+            {
+                dog5.Bark(); // 실행되지 않음
+            }
+            else
+            {
+                Console.WriteLine("animal3 cannot be cast to Dog.");
+            }
         }
     }
 }
