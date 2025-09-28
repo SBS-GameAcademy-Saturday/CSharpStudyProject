@@ -15,24 +15,35 @@ namespace CSharp_ProgramingStudy.Chapter3_String
     public void Run()
     {
       
-      // 원래 문자열 생성
-      string original = "Hello";
-      Console.WriteLine($"원래 문자열: {original}"); // 출력: Hello
+       // 1. String을 이용한 문자열 결합 (성능 저하)
+        Console.WriteLine("--- String 클래스를 이용한 문자열 결합 ---");
+        Stopwatch sw1 = new Stopwatch();
+        string longString = "";
+        
+        sw1.Start();
+        for (int i = 0; i < 10000; i++)
+        {
+            longString += "a";
+        }
+        sw1.Stop();
+        
+        Console.WriteLine($"String 결합에 걸린 시간: {sw1.ElapsedMilliseconds}ms");
+        Console.WriteLine($"최종 문자열 길이: {longString.Length}");
 
-      // 문자열에 " World" 추가 (새로운 문자열 객체가 생성됨)
-      string modified = original + " World";
-      Console.WriteLine($"수정된 문자열: {modified}"); // 출력: Hello World
-
-      // 원래 문자열은 여전히 변경되지 않았음을 확인
-      Console.WriteLine($"수정 후 원래 문자열: {original}"); // 출력: Hello
-
-      // 문자열에 " World" 추가 (새로운 문자열 객체가 생성됨)
-      // Hello => W,o,r,l,d (5 개의 문자를 추가) => 5번이 추가
-      // Hello => H,e,l,l,o + W,o,r,l,d (5 개의 문자를 추가) => 10;
-      string original1 = "Hello"; // 5
-      original1 += " "; // 6
-      original1 += "World"; // 11
-      Console.WriteLine(original1);
+        // 2. StringBuilder를 이용한 문자열 결합 (권장 방식)
+        Console.WriteLine("\n--- StringBuilder 클래스를 이용한 문자열 결합 ---");
+        Stopwatch sw2 = new Stopwatch();
+        StringBuilder sb = new StringBuilder();
+        
+        sw2.Start();
+        for (int i = 0; i < 10000; i++)
+        {
+            sb.Append("a");
+        }
+        sw2.Stop();
+        
+        Console.WriteLine($"StringBuilder 결합에 걸린 시간: {sw2.ElapsedMilliseconds}ms");
+        Console.WriteLine($"최종 문자열 길이: {sb.Length}");
       
       // 문자열이 불변이기 때문에, 원래 문자열은 변경되지 않았습니다.
       // 수정된 문자열은 실제로 새로운 문자열 객체입니다.
