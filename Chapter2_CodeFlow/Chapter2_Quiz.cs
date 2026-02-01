@@ -4,38 +4,69 @@ namespace CSharp_ProgramingStudy.Chapter2_CodeFlow
 {
   public class Chapter2_Quiz
   {
+      // 연습 문제
+      // 영화표 가격 계산기
+      // 2. 기본 변수 설정
+      // 기본 요금(basePrice): 15,000원
+      // - 나이(age): 정수형
+      // - 평일 여부(isWeekday) : 불리언(true: 평일, false: 주말)
+      // - 멤버십 여부(isMember): 불리언(true: 회원, false: 비회원)
 
-    // 열거형 선언
-    enum Days { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
-    /// <summary>
-    /// 문제 1: 정수를 입력받아 홀수인지 짝수인지 판단하고, 짝수라면 요일을 출력하세요.
-    /// - 사용자가 정수를 입력하면, if-else 조건문을 사용하여 그 숫자가 홀수인지 짝수인지를 판단합니다.
-    /// - 짝수인 경우, switch 문과 enum을 사용하여 숫자를 7로 나눈 나머지를 기준으로 요일을 출력합니다.
-    /// 정수를 입력하세요: 12
-    /// 12은 짝수입니다.
-    /// 오늘은 Saturday입니다.
-    /// </summary>
-    public void Quiz_1()
-    {
-      // 문제 1: 사용자 입력을 받아 홀수와 짝수를 판단하고, 짝수일 경우 요일 출력
-      Console.WriteLine("문제 1: 정수를 입력받아 홀수인지 짝수인지 판단하고, 짝수라면 요일을 출력하세요.");
-
-      Console.Write("정수를 입력하세요: ");
-      int userInput = int.Parse(Console.ReadLine());
-
-      if (userInput % 2 == 0)
+      // 3. 할인 및 할증 조건 (논리/비교 연산자 활용)
+      // 다음 조건들을 순서대로 적용하여 최종 가격을 계산하세요.
+      // - 나이가 5세 미만이면 티켓 가격은 0원입니다.
+      // 나이 제한 및 무료 입장:
+      // - 나이가 19세 미만인 '청소년'은 기본 요금에서 3,000원을 할인합니다.
+      // 주말 할증:
+      // - 평일이 아닌 경우(주말인 경우), 기본 요금에 2,000원이 추가됩니다.
+      // 특별 할인 (중복 가능):
+      // - 조조 할인: 평일(isWeekday)이면서 나이가 65세 이상인 경우 추가로 2,000원을 할인합니다.
+      // - 멤버십 할인: 멤버십 회원(isMember)이거나, 현재 결제 금액이 13,000원 이상인 경우 최종 금액에서 2,000원를 할인합니다.
+      // 1. 변수 초기화
+      int _basePrice = 15000;
+      int age = 25;           // 테스트용 나이
+      bool _isWeekday = true; // 테스트용 요일 (true: 평일)
+      bool _isMember = false; // 테스트용 멤버십
+      
+      int _finalPrice = _basePrice;
+      
+      // 2. 주말 할증 (평일이 아닌 경우)
+      // ! 연산자를 사용하여 '평일이 아님'을 판별합니다.
+      if (!_isWeekday)
       {
-        Console.WriteLine($"{userInput}은 짝수입니다.");
-
-        // 짝수인 경우, 요일을 선택하기 위한 switch 문
-        Days today = (Days)(userInput % 7); // 입력된 숫자를 7로 나눈 나머지로 요일 결정
-        Console.WriteLine($"오늘은 {today}입니다.");
+          _finalPrice += 2000;
       }
-      else
+      
+      // 3. 나이 제한 및 무료 입장
+      if (age < 5)
       {
-        Console.WriteLine($"{userInput}은 홀수입니다.");
+          _finalPrice = 0;
       }
-    }
+      else if (age < 19)
+      {
+          // 청소년 할인
+          _finalPrice -= 3000;
+      }
+      
+      // 4. 특별 할인 (중복 가능하므로 else if가 아닌 if문 사용)
+      
+      // 조조 할인: 평일이면서 65세 이상 (&& 연산자)
+      if (_isWeekday && age >= 65)
+      {
+          _finalPrice -= 2000;
+      }
+      
+      // 멤버십 할인: 멤버십 회원이거나 결제 금액이 13,000원 이상 (|| 연산자)
+      // 5세 미만 무료 입장객 등이 0원이 된 경우를 고려하여 조건 체크
+      if (_finalPrice > 0 && (_isMember || _finalPrice >= 13000))
+      {
+          _finalPrice -= 2000;
+      }
+      
+      // 최종 결과 출력 (가격이 음수가 되지 않도록 방어 코드 추가)
+      if (_finalPrice < 0) _finalPrice = 0;
+      
+      Console.WriteLine($"최종 영화 티켓 가격: {_finalPrice}원");
 
     /// <summary>
     /// 문제 2: 2부터 9까지의 숫자 중 하나를 입력받아, 해당하는 구구단을 출력하세요.
